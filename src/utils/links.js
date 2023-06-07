@@ -16,15 +16,15 @@ export const navLinks = [
     path: "/dashboard",
   },
   {
-    label: "Payment",
-    path: "/payment",
-  },
-  {
     label: "Instructor Dashboard",
     path: "/instructor-dashboard",
   },
   {
     label: "Admin Dashboard",
     path: "/admin-dashboard",
+  },
+  {
+    label: "Login",
+    path: "/login",
   },
 ];

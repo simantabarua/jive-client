@@ -4,11 +4,17 @@ import Home from "../pages/Home/Home";
 import Instructors from "../pages/Instructors/Instructors";
 import Classes from "../pages/Classes/Classes";
 import Payment from "../pages/Payment/Payment";
-import StudentDashboard from "../pages/StudentDashboard/StudentDashboard";
-import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+import AdminDashboard from "../dashboard/AdminDashboard/AdminDashboard";
 import Registration from "../pages/Registration/Registration";
-import InstructorDashboard from "../pages/InstructorDashboard/InstructorDashboard";
+import InstructorDashboard from "../dashboard/InstructorDashboard/InstructorDashboard";
 import Login from "../pages/Login/Login";
+import Dashboard from "../layout/Dashboard";
+import AddClass from "../dashboard/InstructorDashboard/AddClass";
+import MyClasses from "../dashboard/InstructorDashboard/MyClasses";
+import MySelectedClasses from "../dashboard/StudentDashboard/MySelectedClasses";
+import MyEnrolledClasses from "../dashboard/StudentDashboard/MyEnrolledClasses";
+import ManageClasses from "../dashboard/AdminDashboard/ManageClasses";
+import ManageUsers from "../dashboard/AdminDashboard/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -27,10 +33,7 @@ export const router = createBrowserRouter([
         path: "/classes",
         element: <Classes />,
       },
-      {
-        path: "/dashboard",
-        element: <StudentDashboard />,
-      },
+
       {
         path: "/payment",
         element: <Payment />,
@@ -50,6 +53,36 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "manage-classes",
+        element: <ManageClasses />,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "add-class",
+        element: <AddClass />,
+      },
+      {
+        path: "my-classes",
+        element: <MyClasses />,
+      },
+      {
+        path: "my-selected-classes",
+        element: <MySelectedClasses />,
+      },
+      {
+        path: "my-enrolled-classes",
+        element: <MyEnrolledClasses />,
       },
     ],
   },

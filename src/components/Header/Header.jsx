@@ -39,7 +39,7 @@ const Header = () => {
             </button>
             {isMenuOpen && (
               // for mobile
-              <ul className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ">
+              <ul className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100  rounded-box w-52 ">
                 {menuLinks}
               </ul>
             )}
@@ -47,6 +47,7 @@ const Header = () => {
           <a className="btn btn-ghost normal-case text-xl">Jive</a>
         </div>
         <div className="navbar-center hidden lg:flex">
+          {/* for desktop */}
           <ul className="menu-horizontal gap-2 lg:gap-5  items-center font-semibold">
             {menuLinks}
           </ul>
@@ -75,7 +76,30 @@ const Header = () => {
               </button>
             )}
           </div>
-          <a className="btn">Button</a>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src="https://i.ibb.co/TH55VrN/pizza-bg.jpg" />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </a>
+              </li>
+              <li>
+                <a>Settings</a>
+              </li>
+              <li>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </>
