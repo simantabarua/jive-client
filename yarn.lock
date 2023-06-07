@@ -803,9 +803,9 @@ csstype@^3.0.2:
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
 daisyui@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-3.0.3.tgz#9272b050c82399912efbf63b311b0ae41c7bb9ee"
-  integrity sha512-RSbXsEBj2LonvjOKEI0I64F5xFJrFrthPgxRNeAZKmACQ3NoIoP45lO6UXLW3bm8PVOUGpKf1Br2SWwc1NqnHQ==
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-3.0.4.tgz#b6872967412fa8ac9c7fd5ddb5087060494683a0"
+  integrity sha512-KfQXj1WD0U0qA+9olKqZRgqu/D6udA3+DjsT5PIdk3dOAFFbyzYzUiadiAbZ/QHe98IDBWHmVjjB51Hxg8TydQ==
   dependencies:
     colord "^2.9"
     css-selector-tokenizer "^0.8"
@@ -867,9 +867,9 @@ doctrine@^3.0.0:
     esutils "^2.0.2"
 
 electron-to-chromium@^1.4.411:
-  version "1.4.422"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.422.tgz#b04d0a209889f46858a4ab05f737fb81b99fec91"
-  integrity sha512-OQMid0IRbJv27BhlPiBK8CfGzjeq4ZCBSmpwNi1abyS8w17/BajOUu7hBI49ptDTBCz9NRFbORhWvt41dF7dwg==
+  version "1.4.423"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.423.tgz#99567f3a0563fe0d1d0931e9ce851bca239f6658"
+  integrity sha512-y4A7YfQcDGPAeSWM1IuoWzXpg9RY1nwHzHSwRtCSQFp9FgAVDgdWlFf0RbdWfLWQ2WUI+bddUgk5RgTjqRE6FQ==
 
 es-abstract@^1.19.0, es-abstract@^1.20.4:
   version "1.21.2"
@@ -2089,9 +2089,9 @@ rimraf@3.0.2, rimraf@^3.0.2:
     glob "^7.1.3"
 
 rollup@^3.21.0:
-  version "3.23.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.23.1.tgz#a6e50cb86a17fc2e3248d8ec12ff8666992b0780"
-  integrity sha512-ybRdFVHOoljGEFILHLd2g/qateqUdjE6YS41WXq4p3C/WwD3xtWxV4FYWETA1u9TeXQc5K8L8zHE5d/scOvrOQ==
+  version "3.24.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.24.0.tgz#865dee1fe0bb528747b59914dfab25e6f480e370"
+  integrity sha512-OgraHOIg2YpHQTjl0/ymWfFNBEyPucB7lmhXrQUh38qNOegxLapSPFs9sNr0qKR75awW41D93XafoR2QfhBdUQ==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -2284,6 +2284,11 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
+
+theme-change@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/theme-change/-/theme-change-2.5.0.tgz#d3b064af9c4cd01ab16ce0a4ecb251c827a50e68"
+  integrity sha512-B/UdsgdHAGhSKHTAQnxg/etN0RaMDpehuJmZIjLMDVJ6DGIliRHGD6pODi1CXLQAN9GV0GSyB3G6yCuK05PkPQ==
 
 thenify-all@^1.0.0:
   version "1.6.0"
