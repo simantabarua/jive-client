@@ -2,6 +2,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import {  useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import GoogleSignIn from "../../components/SocialSignIn/GoogleSignIn";
 
 
 const Login = () => {
@@ -102,16 +103,7 @@ const Login = () => {
             </div>
           </form>
 
-          <button
-            className="btn btn-outline  w-full"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              className="w-6 h-6 mx-2"
-            />{" "}
-            Login With Google
-          </button>
-
+        <GoogleSignIn/>
           <div>
             <h2>
               Don&apos;t have an account?{" "}

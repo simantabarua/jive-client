@@ -1,15 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { navLinks } from "../../utils/links";
 import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 import { HiMenuAlt1, HiMoon, HiOutlineX, HiSun } from "react-icons/hi";
+import useAuth from "../../hooks/useAuth";
+import Avatar from "../Common/Avatar";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
+  console.log(user);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   useEffect(() => {
     themeChange(false);
     const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)");
@@ -76,30 +81,13 @@ const Header = () => {
               </button>
             )}
           </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="https://i.ibb.co/TH55VrN/pizza-bg.jpg" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+          {user ? (
+            <Avatar />
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-primary">login</button>
+            </Link>
+          )}
         </div>
       </div>
     </>

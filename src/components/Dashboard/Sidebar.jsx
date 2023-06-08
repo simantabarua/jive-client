@@ -2,9 +2,9 @@ import { NavLink } from 'react-router-dom'
 
 const Sidebar = ({userRole}) => {
   return (
-    <div className="drawer-side">
+    <div className="drawer-side ">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className=" space-y-5  p-4 w-80 h-full">
+        <ul className=" space-y-5 bg-base-200 p-4 w-80 h-full">
           {userRole === "admin" && (
             <>
               <li>
