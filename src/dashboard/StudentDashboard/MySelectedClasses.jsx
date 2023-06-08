@@ -1,5 +1,11 @@
+import ClassesTable from "../../components/Common/ClassesTable";
+
 const MySelectedClasses = () => {
-  return <div>MySelectedClasses</div>;
+  return (
+    <>
+      <ClassesTable />
+    </>
+  );
 };
 
 export default MySelectedClasses;

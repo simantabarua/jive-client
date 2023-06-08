@@ -3,7 +3,7 @@ import ClassesTable from "../../components/Common/ClassesTable";
 const ManageClasses = () => {
   return (
     <>
-     <ClassesTable/>
+     <ClassesTable />
     </>
   );
 };
