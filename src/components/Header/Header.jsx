@@ -10,7 +10,6 @@ const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useAuth();
-  console.log(user);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };

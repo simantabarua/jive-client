@@ -1,5 +1,11 @@
+import ClassesTable from "../../components/Common/ClassesTable";
+
 const MyClasses = () => {
-  return <div>MyClasses</div>;
+  return (
+    <div>
+      <ClassesTable />
+    </div>
+  );
 };
 
 export default MyClasses;
