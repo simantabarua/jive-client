@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import {  useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../components/SocialSignIn/GoogleSignIn";
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 
 const Login = () => {
@@ -10,6 +12,7 @@ const Login = () => {
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
   const navigate = useNavigate();
+  const { emailPasswordSignIn , setLoading} = useAuth();
 
   const {
     register,
@@ -19,8 +22,42 @@ const Login = () => {
 
   const handleLogin = (data) => {
     const { email, password } = data;
-
     // Email password login
+    emailPasswordSignIn(email, password)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Sign in success",
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setLoading(false);
+        let errorMessage;
+        switch (error.code) {
+          case "auth/invalid-email":
+            errorMessage = "Invalid email address";
+            break;
+          case "auth/user-disabled":
+            errorMessage = "This account has been disabled";
+            break;
+          case "auth/user-not-found":
+            errorMessage = "User not found";
+            break;
+          case "auth/wrong-password":
+            errorMessage = "Incorrect password try again";
+            break;
+          default:
+            errorMessage = error.message;
+            break;
+        }
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          html: `<span style="color:red">${errorMessage}</span>`,
+        });
+      });
    
   };
 

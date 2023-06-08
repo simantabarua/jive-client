@@ -1,13 +1,18 @@
+import { updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
+  const { createUserWithEmail, auth, setLoading } = useAuth();
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,6 +22,38 @@ const Registration = () => {
 
   const handleRegister = (data) => {
     const { email, userName, password, photo } = data;
+    createUserWithEmail(email, password)
+      .then(() => {
+        updateProfile(auth.currentUser, {
+          photoURL: photo,
+          displayName: userName,
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Sign in success",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        setLoading(false);
+        let errorMessage = "";
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            errorMessage = "Email address is already in use.";
+            break;
+          case "auth/invalid-email":
+            errorMessage = "Invalid email address.";
+            break;
+          default:
+            errorMessage = error.message;
+            break;
+        }
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          html: `<span style="color:red">${errorMessage}</span>`,
+        });
+      });
   };
   return (
     <div className="">

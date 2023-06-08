@@ -49,7 +49,7 @@ const logOut = () => {
     };
   }, [auth]);
 
-  const authInfo = {user, googleSignIn, emailPasswordSignIn, createUserWithEmail, logOut, loading};
+  const authInfo = {user, googleSignIn, emailPasswordSignIn, createUserWithEmail, logOut, loading ,setLoading, auth};
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
