@@ -1,17 +1,15 @@
-import axios from "axios";
 import { useQuery } from "react-query";
+import useAxios from "./useAxios";
 
 const useClasses = () => {
+  const axiosSecure = useAxios();
   const { isLoading, data: classes } = useQuery("classes", () => {
-    return axios.get("http://localhost:5000/classes");
+    return axiosSecure.get("/classes");
   });
-console.log(classes);
-
 
   return {
     isLoading,
     classes,
-  
   };
 };
 
