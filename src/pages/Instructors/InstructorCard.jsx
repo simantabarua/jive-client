@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
-const InstructorCard = () => {
+const InstructorCard = ({ instructor }) => {
+  const { image, name, email, numberOfClasses } = instructor;
+  console.log(instructor);
+
+  
+
   return (
     <div
       className="card  w-full h-full  md:w-96 md:h-[29rem] bg-base-300 shadow-xl rounded-xl px-2 md:p-4 "
@@ -10,15 +15,16 @@ const InstructorCard = () => {
       <figure>
         <img
           className="h-64 w-full object-left-top object-cover   md:w-96 rounded-lg"
+          src={image}
           loading="lazy"
+          alt=""
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">fgf</h2>
-        <div className="badge badge-secondary">dfd</div>
+        <h2 className="card-title">{name}</h2> 
+        <div className="badge badge-secondary">{email}</div> 
         <div className="flex flex-col md:flex-row md:gap-20">
-          <span> Price: $fdd</span>
-          <span>Rating: fdf</span>
+          <span>Number of Classes: {numberOfClasses}</span> 
         </div>
         <div className="card-actions">
           <Link to="">
