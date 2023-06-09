@@ -1,7 +1,29 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 const ClassCard = ({ classItem }) => {
+  const { user } = useAuth();
   const { image, name, instructor, availableSeats, price } = classItem;
+  const handleSelectedClass = () => {
+    const selectedClassData = {
+      name,
+      instructor,
+      email: user?.email,
+      availableSeats,
+      price,
+      image,
+      paymentStatus: "unpaid",
+    };
+    axios
+      .post("/selected-class", selectedClassData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div
       className="card w-full h-full md:w-96 md:h-[29rem] bg-base-300 shadow-xl rounded-xl px-2 md:p-4"
@@ -24,9 +46,12 @@ const ClassCard = ({ classItem }) => {
           <span>Available Seats: {availableSeats}</span>
         </div>
         <div className="card-actions">
-          <Link to="">
-            <button className="btn btn-sm btn-primary border-0">Select</button>
-          </Link>
+          <button
+            onClick={handleSelectedClass}
+            className="btn btn-sm btn-primary border-0"
+          >
+            Select
+          </button>
         </div>
       </div>
     </div>

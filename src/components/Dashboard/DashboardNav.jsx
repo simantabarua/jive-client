@@ -3,7 +3,7 @@ import Avatar from "../Common/Avatar";
 const DashboardNav = () => {
   return (
     <>
-      <div className="w-full navbar bg-base-300">
+      <div className="w-full navbar bg-base-300 z-10">
         <div className="flex-none lg:hidden">
           <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
             <svg
