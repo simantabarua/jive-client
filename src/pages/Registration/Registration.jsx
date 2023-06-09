@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const Registration = () => {
   const { createUserWithEmail, auth, setLoading } = useAuth();
@@ -22,17 +23,28 @@ const Registration = () => {
 
   const handleRegister = (data) => {
     const { email, userName, password, photo } = data;
+    const newUser = { userName, email, role: "student" };
     createUserWithEmail(email, password)
       .then(() => {
         updateProfile(auth.currentUser, {
           photoURL: photo,
           displayName: userName,
+        }).then(() => {
+          axios
+            .post("/users", newUser)
+            .then((response) => {
+              if (response.data.acknowledged) {
+                Swal.fire({
+                  icon: "success",
+                  title: "Sign in success",
+                });
+                navigate("/");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         });
-        Swal.fire({
-          icon: "success",
-          title: "Sign in success",
-        });
-        navigate("/");
       })
       .catch((error) => {
         setLoading(false);

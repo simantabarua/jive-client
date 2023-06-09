@@ -13,8 +13,11 @@ const MySelectedClasses = () => {
     isLoading,
     data: classes = [],
     refetch,
-  } = useQuery(("selectedClasses", user?.email), () => {
-    return axiosSecure.get(`/selected-class?email=${user?.email}`);
+  } = useQuery(("selectedClasses", user?.email), async () => {
+    const response = await axiosSecure.get(
+      `/selected-class?email=${user?.email}`
+    );
+    return response.data;
   });
 
   const handleDelete = (id) => {
@@ -62,7 +65,7 @@ const MySelectedClasses = () => {
             </tr>
           </thead>
           <tbody>
-            {classes?.data.map(
+            {classes.map(
               ({ _id, name, instructor, availableSeats, price }, index) => (
                 <tr key={index}>
                   <th>{index + 1}</th>
@@ -92,4 +95,3 @@ const MySelectedClasses = () => {
 };
 
 export default MySelectedClasses;
-
