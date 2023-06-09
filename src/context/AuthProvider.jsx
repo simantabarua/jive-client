@@ -47,11 +47,13 @@ const AuthProvider = ({ children }) => {
         axios
           .post("http://localhost:5000/jwt", { email: user?.email })
           .then((response) => {
-            localStorage.setItem('access-token', response.data )
+            localStorage.setItem("access-token", response.data);
           })
           .catch((error) => {
             console.log(error);
           });
+      } else {
+        localStorage.removeItem("access-token");
       }
       setLoading(false);
     });

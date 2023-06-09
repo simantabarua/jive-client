@@ -1,18 +1,18 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import {  useState } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../components/SocialSignIn/GoogleSignIn";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
-
+import Loading from "../../components/Common/Loading";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
   const navigate = useNavigate();
-  const { emailPasswordSignIn , setLoading} = useAuth();
+  const { emailPasswordSignIn, setLoading, user, loading } = useAuth();
 
   const {
     register,
@@ -58,17 +58,21 @@ const Login = () => {
           html: `<span style="color:red">${errorMessage}</span>`,
         });
       });
-   
   };
 
- 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (user) {
+   return navigate("/");
+  }
 
   return (
     <>
-      <div className="h-full flex flex-col items-center justify-center bg-base-200 md:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="h-full flex flex-col items-center justify-center  md:py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 card">
           <div>
-         
             <h2 className="mt-6 text-center text-md md:text-2xl font-extrabold">
               Log in to your account
             </h2>
@@ -140,7 +144,7 @@ const Login = () => {
             </div>
           </form>
 
-        <GoogleSignIn/>
+          <GoogleSignIn />
           <div>
             <h2>
               Don&apos;t have an account?{" "}
