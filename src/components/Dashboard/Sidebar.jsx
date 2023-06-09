@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
 const Sidebar = () => {
-  const userRole = 'student'
+  const userRole = 'instructor'
   return (
     <div className="drawer-side ">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
