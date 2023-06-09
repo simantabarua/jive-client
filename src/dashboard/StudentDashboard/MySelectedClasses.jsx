@@ -9,12 +9,13 @@ const MySelectedClasses = () => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
 
-  const { isLoading, data: classes = [] } = useQuery(
-    ("selectedClasses", user?.email),
-    () => {
-      return axiosSecure.get(`/selected-class?email=${user?.email}`);
-    }
-  );
+  const {
+    isLoading,
+    data: classes = [],
+    refetch,
+  } = useQuery(("selectedClasses", user?.email), () => {
+    return axiosSecure.get(`/selected-class?email=${user?.email}`);
+  });
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -27,7 +28,14 @@ const MySelectedClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("d", id);
+        axiosSecure.delete(`/selected-class/${id}`).then((response) => {
+          console.log(response);
+
+          if (response?.data?.deletedCount > 0) {
+            refetch();
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
       }
     });
   };
@@ -85,13 +93,3 @@ const MySelectedClasses = () => {
 
 export default MySelectedClasses;
 
-// fetch(`http://localhost:5000/carts/${item._id}`, {
-//   method: "DELETE",
-// })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     if (data.deletedCount > 0) {
-//       refetch();
-//       Swal.fire("Deleted!", "Your file has been deleted.", "success");
-//     }
-//   });
