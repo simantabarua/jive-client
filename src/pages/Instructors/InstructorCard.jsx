@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 
 const InstructorCard = ({ instructor }) => {
   const { image, name, email, numberOfClasses } = instructor;
-  console.log(instructor);
-
+  console.log(email);
   
 
   return (
@@ -21,15 +20,15 @@ const InstructorCard = ({ instructor }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{name}</h2> 
-        <div className="badge badge-secondary">{email}</div> 
+        <h2 className="card-title">{name}</h2>
+        <p>{email}</p>
         <div className="flex flex-col md:flex-row md:gap-20">
-          <span>Number of Classes: {numberOfClasses}</span> 
+          <span>Number of Classes: {numberOfClasses}</span>
         </div>
         <div className="card-actions">
           <Link to="">
-            <button className="btn btn-sm bg-pink-600 border-0">
-              View Details
+            <button className="btn btn-sm btn-primary border-0">
+              View Profile
             </button>
           </Link>
         </div>
