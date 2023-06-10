@@ -32,7 +32,7 @@ const Header = () => {
   ));
   return (
     <>
-      <div className="navbar bg-base-200">
+      <div className="w-full navbar bg-base-300 z-10">
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
             <button
@@ -45,6 +45,7 @@ const Header = () => {
               // for mobile
               <ul className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100  rounded-box w-52 ">
                 {menuLinks}
+                {user && <NavLink to="/dashboard">Dashboard</NavLink>}
               </ul>
             )}
           </div>
@@ -54,6 +55,7 @@ const Header = () => {
           {/* for desktop */}
           <ul className="menu-horizontal gap-2 lg:gap-5  items-center font-semibold">
             {menuLinks}
+            {user && <NavLink to="/dashboard">Dashboard</NavLink>}
           </ul>
         </div>
         <div className="navbar-end">

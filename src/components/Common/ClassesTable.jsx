@@ -1,6 +1,7 @@
 import Actions from "./Actions";
 
 const ClassesTable = () => {
+ 
   return (
     <div className="overflow-x-auto">
       <table className="table">

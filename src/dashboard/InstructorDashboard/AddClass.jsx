@@ -8,17 +8,17 @@ const AddClass = () => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
   const handleAddClasses = (data) => {
-    const { className, instructor, email, availableSeats, price } = data;
+    const { className,  availableSeats, price } = data;
     const classData = {
       className,
-      instructor,
-      email,
+      instructor: user.displayName,
+      email: user.email,
       availableSeats: parseFloat(availableSeats),
       price: parseFloat(price),
       classStatus: "pending",
-      totalEnroll : 0
+      totalEnroll: 0,
     };
-    
+
     axiosSecure
       .post("/add-class", classData)
       .then((response) => {
@@ -28,7 +28,7 @@ const AddClass = () => {
             icon: "success",
             title: "Class added successfully",
           });
-          reset()
+          reset();
         }
       })
       .catch((error) => {

@@ -2,24 +2,45 @@ import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "react-query";
 import Loading from "../../components/Common/Loading";
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
-  const { isLoading, data: users = [] } = useQuery(
-    ("user", user?.email),
-    async () => {
-      const response = await axiosSecure.get(`/users?email=${user?.email}`);
-      console.log(response);
+  const {
+    isLoading,
+    data: users = [],
+    refetch,
+  } = useQuery(("user", user?.email), async () => {
+    const response = await axiosSecure.get(`/users?email=${user?.email}`);
+    console.log(response);
 
-      return response.data;
-    }
-  );
+    return response.data;
+  });
+
+  const changeUserRole = (id, role) => {
+    console.log(id, role);
+    axiosSecure
+      .patch(`/change-user-role/${id}`, { role: role })
+      .then((response) => {
+        console.log(response.data);
+
+        if (response.data.modifiedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            title: "user role updated successfully",
+          });
+          refetch();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   if (isLoading) {
     return <Loading />;
   }
-  console.log(users[1]);
 
   return (
     <>
@@ -36,8 +57,8 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map(({ id, userName, email, role }, index) => (
-              <tr key={id}>
+            {users.map(({ _id, userName, email, role }, index) => (
+              <tr key={_id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center space-x-3">
@@ -54,8 +75,18 @@ const ManageUsers = () => {
                 <td>{email}</td>
                 <td>{role}</td>
                 <td className="space-x-2">
-                  <button className="btn btn-sm btn-danger">Make Admin</button>
-                  <button className="btn btn-sm btn-warning">
+                  <button
+                    onClick={() => changeUserRole(_id, "admin")}
+                    className="btn btn-sm btn-danger"
+                    disabled={role ===  'admin'}
+                  >
+                    Make Admin
+                  </button>
+                  <button
+                    onClick={() => changeUserRole(_id, "Instructor")}
+                    className="btn btn-sm btn-warning"
+                    disabled={role === 'instructor' || 'admin'}
+                  >
                     Make Instructor
                   </button>
                 </td>
