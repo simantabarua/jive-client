@@ -16,6 +16,7 @@ import MyEnrolledClasses from "../dashboard/StudentDashboard/MyEnrolledClasses";
 import ManageClasses from "../dashboard/AdminDashboard/ManageClasses";
 import ManageUsers from "../dashboard/AdminDashboard/ManageUsers";
 import PrivateRoute from "./PrivateRoute";
+import StudentDashboard from "../dashboard/StudentDashboard/StudentDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -32,25 +33,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "/classes",
-        element: (
-          <PrivateRoute>
-            <Classes />
-          </PrivateRoute>
-        ),
+        element: <Classes />,
       },
 
       {
         path: "/payment",
         element: <Payment />,
       },
-      {
-        path: "/instructor-dashboard",
-        element: <InstructorDashboard />,
-      },
-      {
-        path: "/admin-dashboard",
-        element: <AdminDashboard />,
-      },
+
       {
         path: "/registration",
         element: <Registration />,
@@ -63,8 +53,24 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
+      {
+        path: "admin-dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "instructor-dashboard",
+        element: <InstructorDashboard />,
+      },
+      {
+        path: "student-dashboard",
+        element: <StudentDashboard />,
+      },
       {
         path: "manage-classes",
         element: <ManageClasses />,
