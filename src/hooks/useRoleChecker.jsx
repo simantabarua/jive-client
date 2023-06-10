@@ -11,7 +11,9 @@ const useRoleChecker = () => {
   const axiosSecure = useAxios();
   const { user } = useAuth();
   const email = user?.email;
-  const { data: role } = useQuery("role", () => fetchUserRole(axiosSecure, email));
+  const { data: role } = useQuery("role", () =>
+    fetchUserRole(axiosSecure, email)
+  );
   return role;
 };
 

@@ -1,22 +1,39 @@
 import { createBrowserRouter } from "react-router-dom";
+// Layouts
 import MainLayout from "../layout/MainLayout";
+import Dashboard from "../layout/Dashboard";
+
+// Pages
 import Home from "../pages/Home/Home";
 import Instructors from "../pages/Instructors/Instructors";
 import Classes from "../pages/Classes/Classes";
 import Payment from "../pages/Payment/Payment";
-import AdminDashboard from "../dashboard/AdminDashboard/AdminDashboard";
 import Registration from "../pages/Registration/Registration";
-import InstructorDashboard from "../dashboard/InstructorDashboard/InstructorDashboard";
 import Login from "../pages/Login/Login";
-import Dashboard from "../layout/Dashboard";
-import AddClass from "../dashboard/InstructorDashboard/AddClass";
-import MyClasses from "../dashboard/InstructorDashboard/MyClasses";
-import MySelectedClasses from "../dashboard/StudentDashboard/MySelectedClasses";
-import MyEnrolledClasses from "../dashboard/StudentDashboard/MyEnrolledClasses";
+
+// Dashboard Components
+import AdminDashboard from "../dashboard/AdminDashboard/AdminDashboard";
+import InstructorDashboard from "../dashboard/InstructorDashboard/InstructorDashboard";
+import StudentDashboard from "../dashboard/StudentDashboard/StudentDashboard";
+
+// Admin Dashboard
 import ManageClasses from "../dashboard/AdminDashboard/ManageClasses";
 import ManageUsers from "../dashboard/AdminDashboard/ManageUsers";
+
+// Instructor Dashboard
+import AddClass from "../dashboard/InstructorDashboard/AddClass";
+import MyClasses from "../dashboard/InstructorDashboard/MyClasses";
+
+// Student Dashboard
+import MySelectedClasses from "../dashboard/StudentDashboard/MySelectedClasses";
+import MyEnrolledClasses from "../dashboard/StudentDashboard/MyEnrolledClasses";
+
+// Route Components
 import PrivateRoute from "./PrivateRoute";
-import StudentDashboard from "../dashboard/StudentDashboard/StudentDashboard";
+import InstructorRoute from "./InstructorRoute";
+import AdminRoute from "./AdminRoute";
+import StudentRoute from "./StudentRoute";
+
 
 export const router = createBrowserRouter([
   {
@@ -61,39 +78,76 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "admin-dashboard",
-        element: <AdminDashboard />,
-      },
-      {
-        path: "instructor-dashboard",
-        element: <InstructorDashboard />,
-      },
-      {
-        path: "student-dashboard",
-        element: <StudentDashboard />,
+        element: (
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-classes",
-        element: <ManageClasses />,
+        element: (
+          <AdminRoute>
+            <ManageClasses />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-users",
-        element: <ManageUsers />,
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
-        path: "add-class",
-        element: <AddClass />,
+        path: "instructor-dashboard",
+        element: (
+          <InstructorRoute>
+            <InstructorDashboard />
+          </InstructorRoute>
+        ),
       },
       {
         path: "my-classes",
-        element: <MyClasses />,
+        element: (
+          <InstructorRoute>
+            <MyClasses />
+          </InstructorRoute>
+        ),
+      },
+
+      {
+        path: "add-class",
+        element: (
+          <InstructorRoute>
+            <AddClass />
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "student-dashboard",
+        element: (
+          <StudentRoute>
+            <StudentDashboard />
+          </StudentRoute>
+        ),
       },
       {
         path: "my-selected-classes",
-        element: <MySelectedClasses />,
+        element: (
+          <StudentRoute>
+            <MySelectedClasses />
+          </StudentRoute>
+        ),
       },
       {
         path: "my-enrolled-classes",
-        element: <MyEnrolledClasses />,
+        element: (
+          <StudentRoute>
+            <MyEnrolledClasses />
+          </StudentRoute>
+        ),
       },
     ],
   },
