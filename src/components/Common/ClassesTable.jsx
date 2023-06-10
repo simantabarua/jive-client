@@ -16,7 +16,7 @@ const ClassesTable = () => {
         </thead>
         <tbody>
           {/* row 1 */}
-          <tr>
+          <tr key={index} >
             <th>1</th>
             <td>
               <div className="flex items-center space-x-3">
