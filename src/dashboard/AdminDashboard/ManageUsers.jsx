@@ -19,23 +19,34 @@ const ManageUsers = () => {
   });
 
   const changeUserRole = (id, role) => {
-    console.log(id, role);
-    axiosSecure
-      .patch(`/change-user-role/${id}`, { role: role })
-      .then((response) => {
-        console.log(response.data);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action will change the user's role.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, change role!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/change-user-role/${id}`, { role: role })
+          .then((response) => {
+            console.log(response.data);
 
-        if (response.data.modifiedCount > 0) {
-          Swal.fire({
-            icon: "success",
-            title: "user role updated successfully",
+            if (response.data.modifiedCount > 0) {
+              Swal.fire({
+                icon: "success",
+                title: `User role updated to ${role} successfully.`,
+              });
+              refetch();
+            }
+          })
+          .catch((error) => {
+            console.log(error);
           });
-          refetch();
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    });
   };
 
   if (isLoading) {
@@ -73,19 +84,19 @@ const ManageUsers = () => {
                   </div>
                 </td>
                 <td>{email}</td>
-                <td>{role}</td>
+                <td className="capitalize">{role}</td>
                 <td className="space-x-2">
                   <button
                     onClick={() => changeUserRole(_id, "admin")}
                     className="btn btn-sm btn-danger"
-                    disabled={role ===  'admin'}
+                    disabled={role === "admin"}
                   >
                     Make Admin
                   </button>
                   <button
-                    onClick={() => changeUserRole(_id, "Instructor")}
+                    onClick={() => changeUserRole(_id, "instructor")}
                     className="btn btn-sm btn-warning"
-                    disabled={role === 'instructor' || 'admin'}
+                    disabled={role === "instructor" || role === "admin"}
                   >
                     Make Instructor
                   </button>
