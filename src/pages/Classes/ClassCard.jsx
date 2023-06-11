@@ -1,8 +1,11 @@
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
 
 const ClassCard = ({ classItem }) => {
   const { user } = useAuth();
+  const axiosSecure = useAxios();
   const { image, name, instructor, availableSeats, price } = classItem;
   const handleSelectedClass = () => {
     const selectedClassData = {
@@ -14,10 +17,15 @@ const ClassCard = ({ classItem }) => {
       image,
       paymentStatus: "unpaid",
     };
-    axios
+    axiosSecure
       .post("/selected-class", selectedClassData)
       .then((response) => {
-        console.log(response.data);
+        if (response.data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Class added successfully",
+          });
+        }
       })
       .catch((error) => {
         console.log(error);

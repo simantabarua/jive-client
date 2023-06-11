@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/instructors").then((response) => {
+    axios.get("/instructors").then((response) => {
       console.log(response.data);
       setInstructors(response.data);
     });
