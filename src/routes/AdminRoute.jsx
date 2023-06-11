@@ -5,12 +5,12 @@ import useAuth from "../hooks/useAuth";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const role = useRoleChecker();
+  const {role, userLoading} = useRoleChecker();
 
   const location = useLocation();
   console.log(role);
 
-  if (loading) {
+  if (loading || userLoading) {
     return <Loading />;
   }
   if (user && role === "admin") {

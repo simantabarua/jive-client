@@ -35,11 +35,13 @@ import AdminRoute from "./AdminRoute";
 import StudentRoute from "./StudentRoute";
 import axios from "axios";
 import UpdateClass from "../dashboard/InstructorDashboard/UpdateClass";
+import NotFound from "../pages/NotFound/NotFound";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <NotFound/>,
     children: [
       {
         path: "/",
@@ -71,6 +73,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
+    errorElement: <NotFound/>,
     element: (
       <PrivateRoute>
         <Dashboard />

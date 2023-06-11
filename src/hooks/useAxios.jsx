@@ -7,18 +7,17 @@ const useAxios = () => {
   //   const navigate = useNavigate();
   //   const { logOut } = useAuth();
   const axiosSecure = axios.create({
-    baseURL: "https://jive-server.vercel.app",
+    baseURL: "http://localhost:5000",
   });
-
+  //request
   axiosSecure.interceptors.request.use((request) => {
     const token = localStorage.getItem("access-token");
-    request.headers.Authorization = `Bearer ${token}`;
     if (token) {
       request.headers.Authorization = `Bearer ${token}`;
     }
     return request;
   });
-
+  //response
   axiosSecure.interceptors.response.use(
     (response) => response,
     (error) => {

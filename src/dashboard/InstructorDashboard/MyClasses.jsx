@@ -31,18 +31,26 @@ const MyClasses = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/delete-class/${id}`).then((response) => {
-          console.log(response);
-
-          if (response?.data?.deletedCount > 0) {
-            refetch();
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          }
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`/delete-class/${id}`).then((response) => {
+            console.log(response);
+            if (response?.data?.deletedCount > 0) {
+              refetch();
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
         });
-      }
-    });
+      });
   };
   if (isLoading) {
     return <Loading />;

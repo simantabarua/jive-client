@@ -5,10 +5,10 @@ import useAuth from "../hooks/useAuth";
 
 const InstructorRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const role = useRoleChecker();
+  const {role, userLoading} = useRoleChecker();
   const location = useLocation();
 
-  if (loading) {
+  if (loading || userLoading) {
     return <Loading />;
   }
   if (user && role === "instructor") {

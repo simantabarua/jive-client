@@ -6,9 +6,9 @@ import useAuth from "../hooks/useAuth";
 import Loading from "../components/Common/Loading";
 
 const Dashboard = () => {
-  const role = useRoleChecker();
-  const { loading } = useAuth();
-  if (loading) {
+  const {role, } = useRoleChecker();
+  const { loading, userLoading } = useAuth();
+  if (loading || userLoading) {
     return <Loading />;
   }
   return (

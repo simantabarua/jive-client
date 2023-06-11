@@ -30,16 +30,20 @@ const ManageUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .patch(`/change-user-role/${id}`, { role: role })
+          .patch(`/change-user-role/${id}`, { role: role, email: user?.email })
           .then((response) => {
-            console.log(response.data);
-
             if (response.data.modifiedCount > 0) {
               Swal.fire({
                 icon: "success",
                 title: `User role updated to ${role} successfully.`,
               });
               refetch();
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+              });
             }
           })
           .catch((error) => {
@@ -96,7 +100,7 @@ const ManageUsers = () => {
                   <button
                     onClick={() => changeUserRole(_id, "instructor")}
                     className="btn btn-sm btn-warning"
-                    disabled={role === "instructor" || role === "admin"}
+                    disabled={role === "instructor"}
                   >
                     Make Instructor
                   </button>
