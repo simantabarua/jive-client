@@ -1,4 +1,3 @@
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
@@ -6,10 +5,12 @@ import Swal from "sweetalert2";
 const ClassCard = ({ classItem }) => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
-  const { image, name, instructor, availableSeats, price } = classItem;
+  const { image, className, instructor, availableSeats, price } = classItem;
   const handleSelectedClass = () => {
+    console.log(classItem);
+    
     const selectedClassData = {
-      name,
+      className,
       instructor,
       email: user?.email,
       availableSeats,

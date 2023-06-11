@@ -162,6 +162,14 @@ export const router = createBrowserRouter([
           </StudentRoute>
         ),
       },
+      {
+        path: "payment",
+        element: (
+          <StudentRoute>
+            <Payment />
+          </StudentRoute>
+        ),
+      },
     ],
   },
 ]);

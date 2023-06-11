@@ -1,24 +1,14 @@
-import useAuth from "../../hooks/useAuth";
-import useAxios from "../../hooks/useAxios";
-import { useQuery } from "react-query";
+
 import Loading from "../../components/Common/Loading";
 import Swal from "sweetalert2";
+import useSelectedClass from "../../hooks/useSelectedClass";
+import useAxios from "../../hooks/useAxios";
 
 const MySelectedClasses = () => {
-  // const [classes, setClasses] = useState([]);
-  const { user } = useAuth();
+  const { isLoading, classes, refetch } = useSelectedClass();
   const axiosSecure = useAxios();
-
-  const {
-    isLoading,
-    data: classes = [],
-    refetch,
-  } = useQuery(("selectedClasses", user?.email), async () => {
-    const response = await axiosSecure.get(
-      `/selected-class?email=${user?.email}`
-    );
-    return response.data;
-  });
+  console.log(classes);
+  
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -66,10 +56,10 @@ const MySelectedClasses = () => {
           </thead>
           <tbody>
             {classes.map(
-              ({ _id, name, instructor, availableSeats, price }, index) => (
+              ({ _id, className, instructor, availableSeats, price }, index) => (
                 <tr key={index}>
                   <th>{index + 1}</th>
-                  <td>{name}</td>
+                  <td>{className}</td>
                   <td>{instructor}</td>
                   <td>{availableSeats}</td>
                   <td>{price}</td>

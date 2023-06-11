@@ -40,6 +40,11 @@ const Sidebar = ({ userRole }) => {
                 My Enrolled Classes
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/dashboard/payment">
+                Payment
+              </NavLink>
+            </li>
           </>
         )}
       </ul>
