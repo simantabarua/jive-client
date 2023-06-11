@@ -2,29 +2,30 @@ import { useForm } from "react-hook-form";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useLoaderData } from "react-router-dom";
 
-const AddClass = () => {
+const UpdateClass = () => {
   const { register, handleSubmit, reset } = useForm();
+  const classData = useLoaderData();
+  const { _id, className, availableSeats, image, price } = classData.data;
+
   const { user } = useAuth();
   const axiosSecure = useAxios();
-  const handleAddClasses = (data) => {
-    const { className, availableSeats, price, image } = data;
-    const classData = {
+  const handleUpdateClasses = (data) => {
+    const { className, availableSeats, image, price } = data;
+    const newClassData = {
       className,
-      instructor: user.displayName,
-      email: user.email,
       image,
       availableSeats: parseFloat(availableSeats),
       price: parseFloat(price),
-      classStatus: "pending",
-      totalEnroll: 0,
     };
 
+    axiosSecure;
     axiosSecure
-      .post("/add-class", classData)
+      .patch(`/update-class/${_id}`, newClassData)
       .then((response) => {
         console.log(response);
-        if (response.data.acknowledged) {
+        if (response.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
             title: "Class added successfully",
@@ -35,11 +36,11 @@ const AddClass = () => {
       .catch((error) => {
         console.log(error);
       });
-    console.log(classData);
   };
+
   return (
     <div>
-      <form onSubmit={handleSubmit(handleAddClasses)}>
+      <form onSubmit={handleSubmit(handleUpdateClasses)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full md:max-w-7xl mx-auto px-5">
           <div className="form-control">
             <label className="label">
@@ -77,6 +78,7 @@ const AddClass = () => {
               {...register("className")}
               placeholder="Class Name"
               className="input input-bordered"
+              defaultValue={className}
             />
           </div>
           <div className="form-control">
@@ -88,6 +90,7 @@ const AddClass = () => {
               {...register("image")}
               placeholder="Image URL"
               className="input input-bordered"
+              defaultValue={image}
             />
           </div>
 
@@ -100,6 +103,7 @@ const AddClass = () => {
               {...register("availableSeats")}
               placeholder="Available Seats"
               className="input input-bordered"
+              defaultValue={availableSeats}
             />
           </div>
 
@@ -112,11 +116,12 @@ const AddClass = () => {
               {...register("price")}
               placeholder="Price"
               className="input input-bordered"
+              defaultValue={price}
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-96">
-            Add Class
+          <button type="submit" className="btn btn-primary w-96 mx-auto">
+            Update Class
           </button>
         </div>
       </form>
@@ -124,4 +129,4 @@ const AddClass = () => {
   );
 };
 
-export default AddClass;
+export default UpdateClass;

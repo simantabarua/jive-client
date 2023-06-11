@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "react-query";
 import Loading from "../../components/Common/Loading";
+import { Link } from "react-router-dom";
 
 const MyClasses = () => {
   const { user } = useAuth();
@@ -77,25 +78,25 @@ const MyClasses = () => {
               index
             ) => (
               <tr key={index}>
-                <th>{index + 1}</th>
+                <td>{index + 1}</td>
                 <td>{className}</td>
                 <td>{availableSeats}</td>
                 <td>{price}</td>
                 <td>{classStatus}</td>
                 <td>{totalEnroll}</td>
-                <th>
-                  <td className="space-x-2">
-                    <button
-                      onClick={() => {
-                        handleDelete(_id);
-                      }}
-                      className="btn btn-danger"
-                    >
-                      Delete
-                    </button>
+                <td className="space-x-2">
+                  <button
+                    onClick={() => {
+                      handleDelete(_id);
+                    }}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                  <Link to={`/dashboard/update-class/${_id}`}>
                     <button className="btn btn-primary">Update</button>
-                  </td>
-                </th>
+                  </Link>
+                </td>
               </tr>
             )
           )}

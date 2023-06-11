@@ -2,9 +2,15 @@ import { Outlet } from "react-router-dom";
 import DashboardNav from "../components/Dashboard/DashboardNav";
 import Sidebar from "../components/Dashboard/Sidebar";
 import useRoleChecker from "../hooks/useRoleChecker";
+import useAuth from "../hooks/useAuth";
+import Loading from "../components/Common/Loading";
 
 const Dashboard = () => {
   const role = useRoleChecker();
+  const { loading } = useAuth();
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

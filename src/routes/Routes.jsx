@@ -33,7 +33,8 @@ import PrivateRoute from "./PrivateRoute";
 import InstructorRoute from "./InstructorRoute";
 import AdminRoute from "./AdminRoute";
 import StudentRoute from "./StudentRoute";
-
+import axios from "axios";
+import UpdateClass from "../dashboard/InstructorDashboard/UpdateClass";
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +116,15 @@ export const router = createBrowserRouter([
             <MyClasses />
           </InstructorRoute>
         ),
+      },
+      {
+        path: "update-class/:id",
+        element: (
+          <InstructorRoute>
+            <UpdateClass />
+          </InstructorRoute>
+        ),
+        loader: ({params}) => axios.get(`/class/${params.id}`)
       },
 
       {
