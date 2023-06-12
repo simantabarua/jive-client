@@ -80,6 +80,7 @@ const ManageClasses = () => {
               <th>Available Seats</th>
               <th>Price</th>
               <th>Status</th>
+              <th>Total Enrolled</th>
               <th></th>
             </tr>
           </thead>
@@ -90,10 +91,11 @@ const ManageClasses = () => {
                   _id,
                   className,
                   instructor,
-                  email,
+                  instructorEmail,
                   availableSeats,
                   price,
                   classStatus,
+                  totalEnroll,
                 },
                 index
               ) => (
@@ -110,10 +112,11 @@ const ManageClasses = () => {
                   </td>
                   <td>{className}</td>
                   <td>{instructor}</td>
-                  <td>{email}</td>
+                  <td>{instructorEmail}</td>
                   <td>{availableSeats}</td>
                   <td>{price}</td>
                   <td className="capitalize">{classStatus}</td>
+                  <td>{totalEnroll}</td>
                   <td className=" flex flex-col gap-3 justify-center items-center">
                     <button
                       onClick={() => {

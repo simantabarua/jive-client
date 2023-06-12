@@ -7,12 +7,14 @@ const ClassCard = ({ classItem }) => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
   const { role } = useRoleChecker();
+console.log(classItem);
 
   const {
     _id,
     image,
     className,
     instructor,
+    instructorEmail,
     availableSeats,
     price,
     totalEnroll,
@@ -22,6 +24,7 @@ const ClassCard = ({ classItem }) => {
       classId: _id,
       className,
       instructor,
+      instructorEmail,
       email: user?.email,
       availableSeats,
       price,

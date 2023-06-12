@@ -12,7 +12,7 @@ const AddClass = () => {
     const classData = {
       className,
       instructor: user.displayName,
-      email: user.email,
+      instructorEmail: user.email,
       image,
       availableSeats: parseFloat(availableSeats),
       price: parseFloat(price),

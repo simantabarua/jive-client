@@ -1,4 +1,3 @@
-
 import Loading from "../../components/Common/Loading";
 import Swal from "sweetalert2";
 import useSelectedClass from "../../hooks/useSelectedClass";
@@ -8,7 +7,6 @@ const MySelectedClasses = () => {
   const { isLoading, classes, refetch } = useSelectedClass();
   const axiosSecure = useAxios();
   console.log(classes);
-  
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -49,6 +47,7 @@ const MySelectedClasses = () => {
               <th>#</th>
               <th>Class Name</th>
               <th>Instructor Name</th>
+              <th>Instructor Email</th>
               <th>Available Seats</th>
               <th>Price</th>
               <th>Actions</th>
@@ -56,11 +55,22 @@ const MySelectedClasses = () => {
           </thead>
           <tbody>
             {classes.map(
-              ({ _id, className, instructor, availableSeats, price }, index) => (
+              (
+                {
+                  _id,
+                  className,
+                  instructor,
+                  availableSeats,
+                  price,
+                  instructorEmail,
+                },
+                index
+              ) => (
                 <tr key={index}>
                   <th>{index + 1}</th>
                   <td>{className}</td>
                   <td>{instructor}</td>
+                  <td>{instructorEmail}</td>
                   <td>{availableSeats}</td>
                   <td>{price}</td>
                   <td className="space-x-2">

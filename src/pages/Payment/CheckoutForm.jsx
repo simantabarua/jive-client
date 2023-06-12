@@ -67,7 +67,7 @@ const CheckoutForm = ({ classes, price }) => {
         title: "Something went wrong",
       });
     }
-//todo handle error message
+    //todo handle error message
     setProcessing(false);
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
@@ -77,6 +77,7 @@ const CheckoutForm = ({ classes, price }) => {
         price,
         date: new Date(),
         quantity: classes.length,
+        instructorEmail: classes.map((item) => item.instructorEmail),
         classesItems: classes.map((item) => item._id),
         classesId: classes.map((item) => item.classId),
         classesNames: classes.map((item) => item.className),
