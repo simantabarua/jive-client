@@ -8,8 +8,15 @@ const ClassCard = ({ classItem }) => {
   const axiosSecure = useAxios();
   const { role } = useRoleChecker();
 
-  const { _id, image, className, instructor, availableSeats, price } =
-    classItem;
+  const {
+    _id,
+    image,
+    className,
+    instructor,
+    availableSeats,
+    price,
+    totalEnroll,
+  } = classItem;
   const handleSelectedClass = () => {
     const selectedClassData = {
       classId: _id,
@@ -43,7 +50,7 @@ const ClassCard = ({ classItem }) => {
           <img
             className="h-64 w-full object-left-top object-cover md:w-96 rounded-lg"
             src={image}
-            alt={name}
+            alt={className}
             loading="lazy"
           />
         </figure>
@@ -54,6 +61,7 @@ const ClassCard = ({ classItem }) => {
             <span>Price: ${price}</span>
             <span>Available Seats: {availableSeats}</span>
           </div>
+          <span>Student Enrolled: {totalEnroll}</span>
           <div className="card-actions">
             {role === "student" && (
               <button

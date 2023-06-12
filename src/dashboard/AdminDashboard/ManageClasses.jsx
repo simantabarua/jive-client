@@ -1,11 +1,23 @@
 import Swal from "sweetalert2";
 import Loading from "../../components/Common/Loading";
 import useAxios from "../../hooks/useAxios";
-import useClasses from "../../hooks/useClasses";
+import useAuth from "../../hooks/useAuth";
+import { useQuery } from "react-query";
 
 const ManageClasses = () => {
-  const { isLoading, classes, refetch } = useClasses();
   const axiosSecure = useAxios();
+  const { user, loading } = useAuth();
+
+  const {
+    isLoading,
+    data: classes = [],
+    refetch,
+  } = useQuery("classes", async () => {
+    const response = await axiosSecure.get(`/classes-all?email=${user.email}`);
+
+    return response.data;
+  });
+
   const handleClassStatus = (id, status) => {
     console.log(id, status);
 
@@ -48,8 +60,8 @@ const ManageClasses = () => {
       }
     });
   };
-  
-  if (isLoading) {
+
+  if (isLoading || loading) {
     return <Loading />;
   }
 
@@ -121,7 +133,9 @@ const ManageClasses = () => {
                     >
                       Deny
                     </button>
-                    <button className="btn btn-xs w-32 btn-info">Feedback</button>
+                    <button className="btn btn-xs w-32 btn-info">
+                      Feedback
+                    </button>
                     <button
                       onClick={() => {
                         handleDelete(_id);
