@@ -36,12 +36,13 @@ import StudentRoute from "./StudentRoute";
 import axios from "axios";
 import UpdateClass from "../dashboard/InstructorDashboard/UpdateClass";
 import NotFound from "../pages/NotFound/NotFound";
+import ManageOrders from "../dashboard/AdminDashboard/ManageOrders";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <NotFound/>,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -73,7 +74,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    errorElement: <NotFound/>,
+    errorElement: <NotFound />,
     element: (
       <PrivateRoute>
         <Dashboard />
@@ -105,6 +106,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "manage-orders",
+        element: (
+          <AdminRoute>
+            <ManageOrders />
+          </AdminRoute>
+        ),
+      },
+      {
         path: "instructor-dashboard",
         element: (
           <InstructorRoute>
@@ -127,7 +136,7 @@ export const router = createBrowserRouter([
             <UpdateClass />
           </InstructorRoute>
         ),
-        loader: ({params}) => axios.get(`/class/${params.id}`)
+        loader: ({ params }) => axios.get(`/class/${params.id}`),
       },
 
       {

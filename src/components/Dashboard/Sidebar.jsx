@@ -13,6 +13,9 @@ const Sidebar = ({ userRole }) => {
             <li>
               <NavLink to="/dashboard/manage-users">Manage Users</NavLink>
             </li>
+            <li>
+              <NavLink to="/dashboard/manage-orders">Manage Orders</NavLink>
+            </li>
           </>
         )}
 
@@ -24,7 +27,6 @@ const Sidebar = ({ userRole }) => {
             <li>
               <NavLink to="/dashboard/add-class">Add a Class</NavLink>
             </li>
-           
           </>
         )}
 
@@ -41,9 +43,7 @@ const Sidebar = ({ userRole }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/payment">
-                Payment
-              </NavLink>
+              <NavLink to="/dashboard/payment">Payment</NavLink>
             </li>
           </>
         )}

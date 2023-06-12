@@ -93,14 +93,14 @@ const ManageUsers = () => {
                   <button
                     onClick={() => changeUserRole(_id, "admin")}
                     className="btn btn-sm btn-danger"
-                    disabled={role === "admin"}
+                    // disabled={role === "admin"}
                   >
                     Make Admin
                   </button>
                   <button
                     onClick={() => changeUserRole(_id, "instructor")}
                     className="btn btn-sm btn-warning"
-                    disabled={role === "instructor"}
+                    // disabled={role === "instructor"}
                   >
                     Make Instructor
                   </button>

@@ -5,11 +5,12 @@ import Swal from "sweetalert2";
 const ClassCard = ({ classItem }) => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
-  const { image, className, instructor, availableSeats, price } = classItem;
+  const {_id, image, className, instructor, availableSeats, price } = classItem;
   const handleSelectedClass = () => {
     console.log(classItem);
     
     const selectedClassData = {
+      classId: _id,
       className,
       instructor,
       email: user?.email,
@@ -45,7 +46,7 @@ const ClassCard = ({ classItem }) => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{name}</h2>
+          <h2 className="card-title">{className}</h2>
           <p>{instructor}</p>
           <div className="flex flex-col md:flex-row md:gap-20">
             <span>Price: ${price}</span>

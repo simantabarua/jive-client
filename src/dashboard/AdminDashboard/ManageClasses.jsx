@@ -107,7 +107,7 @@ const ManageClasses = () => {
                       onClick={() => {
                         handleClassStatus(_id, "approved");
                       }}
-                      className="btn btn-xs btn-primary"
+                      className="btn btn-xs btn-success"
                       disabled={classStatus === "approved"}
                     >
                       Approve
@@ -116,17 +116,17 @@ const ManageClasses = () => {
                       onClick={() => {
                         handleClassStatus(_id, "denied");
                       }}
-                      className="btn btn-xs btn-danger"
+                      className="btn btn-xs btn-error"
                       disabled={classStatus === "denied"}
                     >
                       Deny
                     </button>
-                    <button className="btn btn-xs btn-warning">Feedback</button>
+                    <button className="btn btn-xs btn-info">Feedback</button>
                     <button
                       onClick={() => {
                         handleDelete(_id);
                       }}
-                      className="btn btn-xs btn-warning"
+                      className="btn btn-xs btn-error"
                     >
                       Delete
                     </button>
