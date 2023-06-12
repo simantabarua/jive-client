@@ -7,44 +7,52 @@ const Sidebar = ({ userRole }) => {
       <ul className=" space-y-5 bg-base-200 p-4 w-56 h-full">
         {userRole === "admin" && (
           <>
-            <li>
-              <NavLink to="/dashboard/manage-classes">Manage Classes</NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/manage-users">Manage Users</NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/manage-orders">Manage Orders</NavLink>
-            </li>
+            <ul className="menu menu-compact  bg-base-200 w-52 rounded-box">
+              <li>
+                <NavLink to="/dashboard/manage-classes">Manage Classes</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/manage-users">Manage Users</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/manage-orders">Manage Orders</NavLink>
+              </li>
+            </ul>
           </>
         )}
 
         {userRole === "instructor" && (
           <>
-            <li>
-              <NavLink to="/dashboard/my-classes">My Classes</NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/add-class">Add a Class</NavLink>
-            </li>
+            <ul className="menu menu-compact   bg-base-200 w-52 rounded-box">
+              <li className="menu-title">Title</li>
+              <li>
+                <NavLink to="/dashboard/my-classes">My Classes</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/add-class">Add a Class</NavLink>
+              </li>
+            </ul>
           </>
         )}
 
         {userRole === "student" && (
           <>
-            <li>
-              <NavLink to="/dashboard/my-selected-classes">
-                My Selected Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/my-enrolled-classes">
-                My Enrolled Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/payment">Payment</NavLink>
-            </li>
+            <ul className="menu menu-compact nu bg-base-200 w-52 rounded-box">
+              <li className="menu-title">Title</li>
+              <li>
+                <NavLink to="/dashboard/my-selected-classes">
+                  My Selected Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/my-enrolled-classes">
+                  My Enrolled Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/payment">Payment</NavLink>
+              </li>
+            </ul>
           </>
         )}
       </ul>

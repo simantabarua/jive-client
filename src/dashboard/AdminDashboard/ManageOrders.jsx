@@ -20,13 +20,15 @@ const ManageOrders = () => {
       return response.data;
     }
   });
-
-  const changeOrderStatus = async (orderId, status) => {
+  
+  const changeOrderStatus = async (orderId, status, classesId) => {
+    const order = {
+      classesId: classesId,
+      status,
+      email: user?.email,
+    }
     try {
-      await axiosSecure.patch(`/orders/${orderId}`, {
-        status,
-        email: user?.email,
-      });
+      await axiosSecure.patch(`/orders/${orderId}`, order);
       Swal.fire({
         icon: "success",
         text: "Order status changed successfully",
@@ -62,7 +64,7 @@ const ManageOrders = () => {
           </thead>
           <tbody>
             {orders.map(
-              ({ _id, email, transactionId, date, price, status }, index) => (
+              ({ _id, email, transactionId, date, price, status, classesId }, index) => (
                 <tr key={_id}>
                   <td>{index + 1}</td>
                   <td>{email}</td>
@@ -72,7 +74,7 @@ const ManageOrders = () => {
                   <td>{status}</td>
                   <td className="space-x-2">
                     <button
-                      onClick={() => changeOrderStatus(_id, "approved")}
+                      onClick={() => changeOrderStatus(_id, "approved", classesId)}
                       className="btn btn-xs btn-primary"
                     >
                       Approve Order
