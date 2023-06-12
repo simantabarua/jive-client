@@ -1,12 +1,23 @@
 import Loading from "../../components/Common/Loading";
 import Swal from "sweetalert2";
-import useSelectedClass from "../../hooks/useSelectedClass";
 import useAxios from "../../hooks/useAxios";
+import { useQuery } from "react-query";
+import useAuth from "../../hooks/useAuth";
 
 const MySelectedClasses = () => {
-  const { isLoading, classes, refetch } = useSelectedClass();
+  const {user} = useAuth()
   const axiosSecure = useAxios();
-
+  const {
+    isLoading,
+    data: selectedClasses = [],
+    refetch,
+  } = useQuery("selectedClasses", async () => {
+    const response = await axiosSecure.get(
+      `/selected-class?email=${user?.email}`
+    );
+    return response.data;
+  });
+  
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -19,7 +30,6 @@ const MySelectedClasses = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/selected-class/${id}`).then((response) => {
-
           if (response?.data?.deletedCount > 0) {
             refetch();
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
@@ -51,7 +61,7 @@ const MySelectedClasses = () => {
             </tr>
           </thead>
           <tbody>
-            {classes.map(
+            {selectedClasses.map(
               (
                 {
                   _id,

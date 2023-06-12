@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const useAxios = () => {
-    const navigate = useNavigate();
-    const { logOut } = useAuth();
+  const navigate = useNavigate();
+  const { logOut } = useAuth();
   const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://jive-server.vercel.app",
   });
   //request
   axiosSecure.interceptors.request.use((request) => {
@@ -20,12 +20,12 @@ const useAxios = () => {
   //response
   axiosSecure.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error) => {
       if (
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {
-        logOut();
+        await logOut();
         navigate("/login");
       }
       return Promise.reject(error);
