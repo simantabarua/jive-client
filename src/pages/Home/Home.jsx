@@ -1,15 +1,16 @@
-import axios from "axios";
+import HeroBanner from "./HeroBanner";
+import PopularClasses from "./PopularClasses";
+import PopularInstructors from "./PopularInstructors";
+import Testimonials from "./Testimonial";
 
 const Home = () => {
-  const genToken = () => {
-    
-  };
   return (
-    <div>
-      <button onClick={genToken} className="btn btn-primary">
-        gen
-      </button>
-    </div>
+    <>
+      <HeroBanner />
+      <PopularClasses />
+      <PopularInstructors />
+      <Testimonials />
+    </>
   );
 };
 

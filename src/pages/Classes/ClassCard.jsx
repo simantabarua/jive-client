@@ -7,7 +7,6 @@ const ClassCard = ({ classItem }) => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
   const { role } = useRoleChecker();
-console.log(classItem);
 
   const {
     _id,
