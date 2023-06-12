@@ -24,7 +24,7 @@ const MyEnrolledClasses = () => {
           <tr>
             <th>#</th>
             <th>Classes</th>
-            <th>Price</th>
+            <th>Total Paid</th>
             <th>Date</th>
             <th>Quantity</th>
             <th>TransactionId</th>

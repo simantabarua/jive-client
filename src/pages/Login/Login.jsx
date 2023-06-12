@@ -147,7 +147,7 @@ const Login = () => {
           <GoogleSignIn />
           <div>
             <h2>
-              Don&apos;t have an account?{" "}
+              Don&apos;t have an account?
               <Link className="btn-link" to="/registration">
                 Click here to Register
               </Link>

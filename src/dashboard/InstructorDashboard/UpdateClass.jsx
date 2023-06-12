@@ -24,7 +24,6 @@ const UpdateClass = () => {
     axiosSecure
       .patch(`/update-class/${_id}`, newClassData)
       .then((response) => {
-        console.log(response);
         if (response.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",

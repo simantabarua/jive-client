@@ -17,11 +17,10 @@ const CheckoutForm = ({ classes, price }) => {
   useEffect(() => {
     if (price > 0) {
       axiosSecure.post("/payment-intent", { price }).then((res) => {
-        console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
     }
-  }, [price]);
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,7 +45,6 @@ const CheckoutForm = ({ classes, price }) => {
     } else {
       setCardError("");
     }
-
     setProcessing(true);
 
     const { paymentIntent, error: confirmError } =
@@ -85,7 +83,6 @@ const CheckoutForm = ({ classes, price }) => {
       };
 
       axiosSecure.post("/payments", payment).then((response) => {
-        console.log("pa", response?.data);
         if (response?.data.insertResult?.insertedId) {
           Swal.fire({
             icon: "success",

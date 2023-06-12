@@ -6,7 +6,6 @@ import useAxios from "../../hooks/useAxios";
 const MySelectedClasses = () => {
   const { isLoading, classes, refetch } = useSelectedClass();
   const axiosSecure = useAxios();
-  console.log(classes);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -20,7 +19,6 @@ const MySelectedClasses = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/selected-class/${id}`).then((response) => {
-          console.log(response);
 
           if (response?.data?.deletedCount > 0) {
             refetch();
@@ -31,7 +29,6 @@ const MySelectedClasses = () => {
     });
   };
 
-  console.log(classes);
 
   if (isLoading) {
     return <Loading />;

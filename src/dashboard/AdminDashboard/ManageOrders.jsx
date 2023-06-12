@@ -6,8 +6,6 @@ import Swal from "sweetalert2";
 
 const ManageOrders = () => {
   const { user } = useAuth();
-  console.log(user.email);
-
   const axiosSecure = useAxios();
   const {
     isLoading,
@@ -16,11 +14,9 @@ const ManageOrders = () => {
   } = useQuery(["orders", user?.email], async () => {
     if (user?.email) {
       const response = await axiosSecure.get(`/orders?email=${user.email}`);
-      console.log(response);
       return response.data;
     }
   });
-  console.log(orders);
 
   const changeOrderStatus = async (
     orderId,
@@ -102,6 +98,7 @@ const ManageOrders = () => {
                         )
                       }
                       className="btn btn-xs btn-primary"
+                      disabled={status === "approved"}
                     >
                       Approve Order
                     </button>
@@ -115,6 +112,7 @@ const ManageOrders = () => {
                         )
                       }
                       className="btn btn-xs btn-error"
+                      disabled={status === "declined"}
                     >
                       Decline Order
                     </button>

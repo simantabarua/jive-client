@@ -1,15 +1,19 @@
 import axios from "axios";
 import InstructorCard from "./InstructorCard";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import Loading from "../../components/Common/Loading";
 
 const Instructors = () => {
-  const [instructors, setInstructors] = useState([]);
-  useEffect(() => {
-    axios.get("/instructors").then((response) => {
-      console.log(response.data);
-      setInstructors(response.data);
-    });
-  }, []);
+  const { isLoading, data: instructors = [] } = useQuery(
+    "instructor",
+    async () => {
+      const response = await axios.get("/instructors");
+      return response.data;
+    }
+  );
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 xl:grid-cols-3 gap-6  px-3 lg:px-6 place-items-center">
@@ -22,5 +26,3 @@ const Instructors = () => {
 };
 
 export default Instructors;
-
-0

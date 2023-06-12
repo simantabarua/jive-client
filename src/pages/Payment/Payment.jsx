@@ -10,7 +10,6 @@ const Payment = () => {
   const totalPayment = parseFloat(
     classes.reduce((sum, items) => sum + items.price, 0).toFixed(2)
   );
-  console.log(totalPayment);
   return (
     <div>
       <h2>Total payment { totalPayment}</h2>

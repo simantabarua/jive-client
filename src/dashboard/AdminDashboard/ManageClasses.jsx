@@ -19,12 +19,10 @@ const ManageClasses = () => {
   });
 
   const handleClassStatus = (id, status,instructorEmail) => {
-    console.log(id, status);
 
     axiosSecure
       .patch(`/change-class/${id}`, { status: status, instructorEmail:instructorEmail })
       .then((response) => {
-        console.log(response.data);
         if (response.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
@@ -50,7 +48,6 @@ const ManageClasses = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/delete-class/${id}`).then((response) => {
-          console.log(response);
 
           if (response?.data?.deletedCount > 0) {
             refetch();

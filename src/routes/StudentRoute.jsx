@@ -6,10 +6,7 @@ import useAuth from "../hooks/useAuth";
 const StudentRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const {role, userLoading} = useRoleChecker();
-
   const location = useLocation();
-  console.log(role);
-
   if (loading || userLoading) {
     return <Loading />;
   }

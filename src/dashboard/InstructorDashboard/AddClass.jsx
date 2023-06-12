@@ -23,7 +23,6 @@ const AddClass = () => {
     axiosSecure
       .post("/add-class", classData)
       .then((response) => {
-        console.log(response);
         if (response.data.acknowledged) {
           Swal.fire({
             icon: "success",
@@ -35,7 +34,6 @@ const AddClass = () => {
       .catch((error) => {
         console.log(error);
       });
-    console.log(classData);
   };
   return (
     <div>

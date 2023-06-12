@@ -17,7 +17,6 @@ const MyClasses = () => {
     const response = await axiosSecure.get(
       `/instructor-classes?email=${user?.email}`
     );
-    console.log(response);
 
     return response.data;
   });
@@ -35,7 +34,6 @@ const MyClasses = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axiosSecure.delete(`/delete-class/${id}`).then((response) => {
-            console.log(response);
             if (response?.data?.deletedCount > 0) {
               refetch();
               Swal.fire("Deleted!", "Your file has been deleted.", "success");

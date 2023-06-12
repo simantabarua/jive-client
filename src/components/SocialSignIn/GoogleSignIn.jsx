@@ -16,7 +16,6 @@ const GoogleSignIn = () => {
           email: data.user.email,
           role: "student",
         };
-        console.log(data, newUser);
         
         axios
           .post("/users", newUser)

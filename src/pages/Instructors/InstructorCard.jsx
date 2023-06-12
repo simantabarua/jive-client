@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 const InstructorCard = ({ instructor }) => {
   const { image, name, email, numberOfClasses } = instructor;
-  console.log(email);
   
 
   return (

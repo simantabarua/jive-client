@@ -13,8 +13,6 @@ const ManageUsers = () => {
     refetch,
   } = useQuery(("user", user?.email), async () => {
     const response = await axiosSecure.get(`/users?email=${user?.email}`);
-    console.log(response);
-
     return response.data;
   });
 
@@ -93,14 +91,14 @@ const ManageUsers = () => {
                   <button
                     onClick={() => changeUserRole(_id, "admin")}
                     className="btn btn-sm btn-danger"
-                    // disabled={role === "admin"}
+                    disabled={role === "admin"}
                   >
                     Make Admin
                   </button>
                   <button
                     onClick={() => changeUserRole(_id, "instructor")}
                     className="btn btn-sm btn-warning"
-                    // disabled={role === "instructor"}
+                    disabled={role === "instructor"}
                   >
                     Make Instructor
                   </button>
@@ -116,15 +114,3 @@ const ManageUsers = () => {
 
 export default ManageUsers;
 
-// useEffect(() => {
-//   if (user?.email) {
-//     axiosSecure
-//       .get(`/users?email=${user?.email}`)
-//       .then((response) => {
-//         console.log(response.data);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   }
-// }, [user]);

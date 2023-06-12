@@ -1,50 +1,9 @@
-import useAuth from "../../hooks/useAuth";
-import useAxios from "../../hooks/useAxios";
-import Swal from "sweetalert2";
-import useRoleChecker from "../../hooks/useRoleChecker";
+import useSelectedClass from "../../hooks/useSelectedClass";
 
 const ClassCard = ({ classItem }) => {
-  const { user } = useAuth();
-  const axiosSecure = useAxios();
-  const { role } = useRoleChecker();
-
-  const {
-    _id,
-    image,
-    className,
-    instructor,
-    instructorEmail,
-    availableSeats,
-    price,
-    totalEnroll,
-  } = classItem;
-  const handleSelectedClass = () => {
-    const selectedClassData = {
-      classId: _id,
-      className,
-      instructor,
-      instructorEmail,
-      email: user?.email,
-      availableSeats,
-      price,
-      image,
-      paymentStatus: "unpaid",
-    };
-    axiosSecure
-      .post("/selected-class", selectedClassData)
-      .then((response) => {
-        if (response.data.insertedId) {
-          Swal.fire({
-            icon: "success",
-            title: "Class added successfully",
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
+  const { image, className, instructor, availableSeats, price, totalEnroll } =
+    classItem;
+  const { handleSelectedClass } = useSelectedClass();
   return (
     <>
       <div className="card w-full h-full md:w-96 md:h-[29rem] bg-base-300 shadow-xl rounded-xl px-2 md:p-4">
@@ -65,14 +24,14 @@ const ClassCard = ({ classItem }) => {
           </div>
           <span>Student Enrolled: {totalEnroll}</span>
           <div className="card-actions">
-            {role === "student" && (
-              <button
-                onClick={handleSelectedClass}
-                className="btn btn-sm btn-primary border-0"
-              >
-                Select
-              </button>
-            )}
+            <button
+              onClick={() => {
+                handleSelectedClass(classItem);
+              }}
+              className="btn btn-sm btn-primary border-0"
+            >
+              Select
+            </button>
           </div>
         </div>
       </div>
