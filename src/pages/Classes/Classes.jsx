@@ -3,12 +3,10 @@ import Loading from "../../components/Common/Loading";
 import useClasses from "../../hooks/useClasses";
 
 const Classes = () => {
+
   const { classes, isLoading } = useClasses();
- 
-  if (isLoading) return <Loading/>
 
-  
-
+  if (isLoading) return <Loading />;
 
   return (
     <>

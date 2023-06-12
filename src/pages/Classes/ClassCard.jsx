@@ -1,14 +1,16 @@
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
+import useRoleChecker from "../../hooks/useRoleChecker";
 
 const ClassCard = ({ classItem }) => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
-  const {_id, image, className, instructor, availableSeats, price } = classItem;
+  const { role } = useRoleChecker();
+
+  const { _id, image, className, instructor, availableSeats, price } =
+    classItem;
   const handleSelectedClass = () => {
-    console.log(classItem);
-    
     const selectedClassData = {
       classId: _id,
       className,
@@ -53,12 +55,14 @@ const ClassCard = ({ classItem }) => {
             <span>Available Seats: {availableSeats}</span>
           </div>
           <div className="card-actions">
-            <button
-              onClick={handleSelectedClass}
-              className="btn btn-sm btn-primary border-0"
-            >
-              Select
-            </button>
+            {role === "student" && (
+              <button
+                onClick={handleSelectedClass}
+                className="btn btn-sm btn-primary border-0"
+              >
+                Select
+              </button>
+            )}
           </div>
         </div>
       </div>

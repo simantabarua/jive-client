@@ -102,12 +102,12 @@ const ManageClasses = () => {
                   <td>{availableSeats}</td>
                   <td>{price}</td>
                   <td className="capitalize">{classStatus}</td>
-                  <td className="space-x-2">
+                  <td className=" flex flex-col gap-3 justify-center items-center">
                     <button
                       onClick={() => {
                         handleClassStatus(_id, "approved");
                       }}
-                      className="btn btn-xs btn-success"
+                      className="btn btn-xs w-32 btn-success"
                       disabled={classStatus === "approved"}
                     >
                       Approve
@@ -116,17 +116,17 @@ const ManageClasses = () => {
                       onClick={() => {
                         handleClassStatus(_id, "denied");
                       }}
-                      className="btn btn-xs btn-error"
+                      className="btn btn-xs w-32 btn-warning"
                       disabled={classStatus === "denied"}
                     >
                       Deny
                     </button>
-                    <button className="btn btn-xs btn-info">Feedback</button>
+                    <button className="btn btn-xs w-32 btn-info">Feedback</button>
                     <button
                       onClick={() => {
                         handleDelete(_id);
                       }}
-                      className="btn btn-xs btn-error"
+                      className="btn btn-xs w-32 btn-error"
                     >
                       Delete
                     </button>
