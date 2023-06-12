@@ -20,13 +20,20 @@ const ManageOrders = () => {
       return response.data;
     }
   });
-  
-  const changeOrderStatus = async (orderId, status, classesId) => {
+  console.log(orders);
+
+  const changeOrderStatus = async (
+    orderId,
+    status,
+    classesId,
+    instructorEmail
+  ) => {
     const order = {
       classesId: classesId,
       status,
       email: user?.email,
-    }
+      instructorEmail: instructorEmail,
+    };
     try {
       await axiosSecure.patch(`/orders/${orderId}`, order);
       Swal.fire({
@@ -64,7 +71,19 @@ const ManageOrders = () => {
           </thead>
           <tbody>
             {orders.map(
-              ({ _id, email, transactionId, date, price, status, classesId }, index) => (
+              (
+                {
+                  _id,
+                  email,
+                  transactionId,
+                  date,
+                  price,
+                  status,
+                  classesId,
+                  instructorEmail,
+                },
+                index
+              ) => (
                 <tr key={_id}>
                   <td>{index + 1}</td>
                   <td>{email}</td>
@@ -74,13 +93,27 @@ const ManageOrders = () => {
                   <td>{status}</td>
                   <td className="space-x-2">
                     <button
-                      onClick={() => changeOrderStatus(_id, "approved", classesId)}
+                      onClick={() =>
+                        changeOrderStatus(
+                          _id,
+                          "approved",
+                          classesId,
+                          instructorEmail
+                        )
+                      }
                       className="btn btn-xs btn-primary"
                     >
                       Approve Order
                     </button>
                     <button
-                      onClick={() => changeOrderStatus(_id, "declined")}
+                      onClick={() =>
+                        changeOrderStatus(
+                          _id,
+                          "declined",
+                          classesId,
+                          instructorEmail
+                        )
+                      }
                       className="btn btn-xs btn-error"
                     >
                       Decline Order

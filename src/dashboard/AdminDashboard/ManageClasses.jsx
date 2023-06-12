@@ -18,11 +18,11 @@ const ManageClasses = () => {
     return response.data;
   });
 
-  const handleClassStatus = (id, status) => {
+  const handleClassStatus = (id, status,instructorEmail) => {
     console.log(id, status);
 
     axiosSecure
-      .patch(`/change-class/${id}`, { status: status })
+      .patch(`/change-class/${id}`, { status: status, instructorEmail:instructorEmail })
       .then((response) => {
         console.log(response.data);
         if (response.data.modifiedCount > 0) {
@@ -96,6 +96,7 @@ const ManageClasses = () => {
                   price,
                   classStatus,
                   totalEnroll,
+                  
                 },
                 index
               ) => (
@@ -120,7 +121,7 @@ const ManageClasses = () => {
                   <td className=" flex flex-col gap-3 justify-center items-center">
                     <button
                       onClick={() => {
-                        handleClassStatus(_id, "approved");
+                        handleClassStatus(_id, "approved", instructorEmail);
                       }}
                       className="btn btn-xs w-32 btn-success"
                       disabled={classStatus === "approved"}
@@ -129,7 +130,7 @@ const ManageClasses = () => {
                     </button>
                     <button
                       onClick={() => {
-                        handleClassStatus(_id, "denied");
+                        handleClassStatus(_id, "denied", instructorEmail);
                       }}
                       className="btn btn-xs w-32 btn-warning"
                       disabled={classStatus === "denied"}
