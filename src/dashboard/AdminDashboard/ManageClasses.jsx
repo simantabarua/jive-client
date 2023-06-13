@@ -4,10 +4,12 @@ import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "react-query";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const ManageClasses = () => {
   const axiosSecure = useAxios();
   const { user, loading } = useAuth();
+  const [classId, setClassId] = useState("");
   const { register, handleSubmit } = useForm();
   const {
     isLoading,
@@ -61,7 +63,26 @@ const ManageClasses = () => {
   };
 
   const handleSendFeedback = (data) => {
-    console.log(data);
+    console.log(data.feedback);
+    const id = classId;
+    console.log(id);
+    
+    axiosSecure
+      .patch(`/feedback/${id}`, {
+        feedback: data.feedback,
+      })
+      .then((response) => {
+        if (response.data.modifiedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            title: `feedback send successfully`,
+          });
+          refetch();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   if (isLoading || loading) {
@@ -145,7 +166,10 @@ const ManageClasses = () => {
                     </button>
                     <button
                       className="btn btn-xs w-32 btn-info"
-                      onClick={() => window.my_modal_3.showModal()}
+                      onClick={() => {
+                        window.my_modal_3.showModal();
+                        setClassId(_id);
+                      }}
                     >
                       Feedback
                     </button>
@@ -188,7 +212,6 @@ const ManageClasses = () => {
                   ></textarea>
                 </div>
                 <button
-                  onSubmit={handleSubmit(handleSendFeedback)}
                   className="btn btn-primary w-64 mt-3 border-0"
                   type="submit"
                 >

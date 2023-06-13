@@ -23,7 +23,7 @@ const Registration = () => {
 
   const handleRegister = (data) => {
     const { email, userName, password, photo } = data;
-    const newUser = { userName, email, role: "student" };
+    const newUser = { userName, email, role: "student", image: photo };
     createUserWithEmail(email, password)
       .then(() => {
         updateProfile(auth.currentUser, {

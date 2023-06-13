@@ -7,21 +7,27 @@ import "swiper/css/pagination";
 const HeroBanner = () => {
   const slides = [
     {
-      imageUrl: "https://example.com/image1.jpg",
-      title: "Slide 1 Title",
-      description: "Slide 1 Description",
+      imageUrl: "https://i.ibb.co/16BQ7Pk/slider06.jpg",
+      title: "Unleash Your Dance Potential",
+      description: "Join us this summer and embark on a transformative journey through the art of dance.",
+  },
+    {
+        imageUrl: "https://i.ibb.co/1dbhzNX/slider1-bg-2000x.jpg",
+        title: "Exciting Dance Workshops",
+        description: "Join our workshops to explore different dance techniques and improve your skills.",
     },
     {
-      imageUrl: "https://example.com/image2.jpg",
-      title: "Slide 2 Title",
-      description: "Slide 2 Description",
+        imageUrl: "https://i.ibb.co/7y6q7qv/slider05.jpg",
+        title: "Perform on Stage",
+        description: "Get the opportunity to showcase your talent on our grand stage performances.",
     },
     {
-      imageUrl: "https://example.com/image3.jpg",
-      title: "Slide 3 Title",
-      description: "Slide 3 Description",
+        imageUrl: "https://i.ibb.co/n6QqfQv/slider01.jpg",
+        title: "Fun and Engaging Classes",
+        description: "Enjoy interactive classes that make learning dance a joyful and rewarding experience.",
     },
-  ];
+];
+
 
   const params = {
     pagination: {

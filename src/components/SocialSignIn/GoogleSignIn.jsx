@@ -12,9 +12,10 @@ const GoogleSignIn = () => {
     googleSignIn()
       .then((data) => {
         const newUser = {
-          userName: data.user.displayName,
-          email: data.user.email,
+          userName: data.user?.displayName,
+          email: data.user?.email,
           role: "student",
+          image: data.user?.photoURL
         };
         
         axios

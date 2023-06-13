@@ -6,8 +6,12 @@ import useAuth from "./useAuth";
 const useAxios = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
+  // const axiosSecure = axios.create({
+  //   baseURL: "https://jive-server.vercel.app",
+  // });
+
   const axiosSecure = axios.create({
-    baseURL: "https://jive-server.vercel.app",
+    baseURL: "http://localhost:5000",
   });
   //request
   axiosSecure.interceptors.request.use((request) => {

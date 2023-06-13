@@ -17,6 +17,7 @@ const AddClass = () => {
       availableSeats: parseFloat(availableSeats),
       price: parseFloat(price),
       classStatus: "pending",
+      feedback: "",
       totalEnroll: 0,
     };
 

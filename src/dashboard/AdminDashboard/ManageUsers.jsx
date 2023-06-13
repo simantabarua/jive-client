@@ -70,14 +70,14 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map(({ _id, userName, email, role }, index) => (
+            {users.map(({ _id, userName, email, role, image }, index) => (
               <tr key={_id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src="" alt="" />
+                        <img src={image} alt={userName + "image"} />
                       </div>
                     </div>
                     <div>
