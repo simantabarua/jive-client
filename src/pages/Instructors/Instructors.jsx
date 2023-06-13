@@ -2,8 +2,10 @@ import axios from "axios";
 import InstructorCard from "./InstructorCard";
 import { useQuery } from "react-query";
 import Loading from "../../components/Common/Loading";
+import useTitle from "../../hooks/useTitle";
 
 const Instructors = () => {
+  useTitle("Instructors")
   const { isLoading, data: instructors = [] } = useQuery(
     "instructor",
     async () => {

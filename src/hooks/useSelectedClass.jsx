@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 import useAxios from "./useAxios";
 import Swal from "sweetalert2";
@@ -5,7 +6,25 @@ import Swal from "sweetalert2";
 const useSelectedClass = () => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
+  const navigate = useNavigate();
+  const location = useLocation();
+  
   const handleSelectedClass = (classItem) => {
+    if (!user) {
+      Swal.fire({
+        title: "Please login to order the food",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login now!",
+        preConfirm: () => {
+          return navigate("/login", { state: { from: location } });
+        },
+      });
+      return; 
+    }
+    
     const {
       _id,
       className,
@@ -26,6 +45,7 @@ const useSelectedClass = () => {
       image,
       paymentStatus: "unpaid",
     };
+    
     axiosSecure
       .post(`/selected-class?email=${user?.email}`, selectedClassData)
       .then((response) => {
@@ -43,9 +63,7 @@ const useSelectedClass = () => {
 
   return {
     handleSelectedClass,
-    
   };
 };
 
 export default useSelectedClass;
-

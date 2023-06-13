@@ -4,8 +4,10 @@ import Sidebar from "../components/Dashboard/Sidebar";
 import useRoleChecker from "../hooks/useRoleChecker";
 import useAuth from "../hooks/useAuth";
 import Loading from "../components/Common/Loading";
+import useTitle from "../hooks/useTitle";
 
 const Dashboard = () => {
+  useTitle("Dashboard")
   const {role, } = useRoleChecker();
   const { loading, userLoading } = useAuth();
   if (loading || userLoading) {
