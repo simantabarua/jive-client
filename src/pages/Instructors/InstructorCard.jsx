@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const InstructorCard = ({ instructor }) => {
-  const { image, name, email, numberOfClasses } = instructor;
+  const { image, userName, email, numberOfClasses } = instructor;
   
 
   return (
@@ -19,7 +19,7 @@ const InstructorCard = ({ instructor }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{name}</h2>
+        <h2 className="card-title">{userName}</h2>
         <p>{email}</p>
         <div className="flex flex-col md:flex-row md:gap-20">
           <span>Number of Classes: {numberOfClasses}</span>

@@ -3,11 +3,12 @@ import Loading from "../../components/Common/Loading";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "react-query";
+import { useForm } from "react-hook-form";
 
 const ManageClasses = () => {
   const axiosSecure = useAxios();
   const { user, loading } = useAuth();
-
+  const { register, handleSubmit } = useForm();
   const {
     isLoading,
     data: classes = [],
@@ -18,10 +19,12 @@ const ManageClasses = () => {
     return response.data;
   });
 
-  const handleClassStatus = (id, status,instructorEmail) => {
-
+  const handleClassStatus = (id, status, instructorEmail) => {
     axiosSecure
-      .patch(`/change-class/${id}`, { status: status, instructorEmail:instructorEmail })
+      .patch(`/change-class/${id}`, {
+        status: status,
+        instructorEmail: instructorEmail,
+      })
       .then((response) => {
         if (response.data.modifiedCount > 0) {
           Swal.fire({
@@ -48,7 +51,6 @@ const ManageClasses = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/delete-class/${id}`).then((response) => {
-
           if (response?.data?.deletedCount > 0) {
             refetch();
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
@@ -56,6 +58,10 @@ const ManageClasses = () => {
         });
       }
     });
+  };
+
+  const handleSendFeedback = (data) => {
+    console.log(data);
   };
 
   if (isLoading || loading) {
@@ -93,7 +99,6 @@ const ManageClasses = () => {
                   price,
                   classStatus,
                   totalEnroll,
-                  
                 },
                 index
               ) => (
@@ -121,7 +126,9 @@ const ManageClasses = () => {
                         handleClassStatus(_id, "approved", instructorEmail);
                       }}
                       className="btn btn-xs w-32 btn-success"
-                      disabled={classStatus === "approved"}
+                      disabled={
+                        classStatus === "approved" || classStatus === "denied"
+                      }
                     >
                       Approve
                     </button>
@@ -130,11 +137,16 @@ const ManageClasses = () => {
                         handleClassStatus(_id, "denied", instructorEmail);
                       }}
                       className="btn btn-xs w-32 btn-warning"
-                      disabled={classStatus === "denied"}
+                      disabled={
+                        classStatus === "approved" || classStatus === "denied"
+                      }
                     >
                       Deny
                     </button>
-                    <button className="btn btn-xs w-32 btn-info">
+                    <button
+                      className="btn btn-xs w-32 btn-info"
+                      onClick={() => window.my_modal_3.showModal()}
+                    >
                       Feedback
                     </button>
                     <button
@@ -151,6 +163,41 @@ const ManageClasses = () => {
             )}
           </tbody>
         </table>
+
+        <dialog id="my_modal_3" className="modal">
+          <div className="modal-box w-11/12 max-w-5xl">
+            <form method="dialog">
+              <button
+                htmlFor="my-modal-3"
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              >
+                ✕
+              </button>
+            </form>
+
+            <div>
+              <h3 className="font-bold text-lg">Send feedback</h3>
+              <form onSubmit={handleSubmit(handleSendFeedback)}>
+                <div className="form-control mt-3">
+                  <textarea
+                    placeholder="Write Feedback"
+                    className="input textarea h-32 input-bordered "
+                    {...register("feedback", {
+                      required: "Please type something",
+                    })}
+                  ></textarea>
+                </div>
+                <button
+                  onSubmit={handleSubmit(handleSendFeedback)}
+                  className="btn btn-primary w-64 mt-3 border-0"
+                  type="submit"
+                >
+                  Send Feedback
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </div>
     </>
   );

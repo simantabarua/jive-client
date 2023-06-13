@@ -66,6 +66,7 @@ const MyClasses = () => {
             <th>Price</th>
             <th>Class Status</th>
             <th>Total Enroll</th>
+            <th>Feed Back</th>
             <th></th>
           </tr>
         </thead>
@@ -80,6 +81,7 @@ const MyClasses = () => {
                 price,
                 classStatus,
                 totalEnroll,
+                feedback
               },
               index
             ) => (
@@ -90,6 +92,7 @@ const MyClasses = () => {
                 <td>{price}</td>
                 <td>{classStatus}</td>
                 <td>{totalEnroll}</td>
+                <td>{feedback}</td>
                 <td className="space-x-2">
                   <button
                     onClick={() => {

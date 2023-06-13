@@ -98,7 +98,7 @@ const ManageOrders = () => {
                         )
                       }
                       className="btn btn-xs btn-primary"
-                      disabled={status === "approved"}
+                      disabled={status === "declined" || status === "approved"}
                     >
                       Approve Order
                     </button>
@@ -112,7 +112,7 @@ const ManageOrders = () => {
                         )
                       }
                       className="btn btn-xs btn-error"
-                      disabled={status === "declined"}
+                      disabled={status === "declined" || status === "approved"}
                     >
                       Decline Order
                     </button>
