@@ -1,19 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import useAuth from "./useAuth";
 import useAxios from "./useAxios";
 
 const useRoleChecker = () => {
+  const [role, setRole] = useState("student");
   const axiosSecure = useAxios();
   const { user } = useAuth();
   const email = user?.email;
 
-  const { data: role, isLoading } = useQuery(["role", email], async () => {
+  const { data: userRole, isLoading } = useQuery(["role", email], async () => {
     if (!user) {
-      return "student";
+      setRole("student");
+      return;
     } else {
       const response = await axiosSecure.get(`/check-user?email=${email}`);
-      return response.data;
+      setRole(response.data);
+      return userRole;
     }
   });
 

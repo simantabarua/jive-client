@@ -5,6 +5,7 @@ import useTitle from "../../hooks/useTitle";
 import useRoleChecker from "../../hooks/useRoleChecker";
 
 const Classes = () => {
+  
   useTitle("Classes");
   const { classes, isLoading } = useClasses();
   const { role } = useRoleChecker();

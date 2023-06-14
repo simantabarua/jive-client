@@ -7,8 +7,8 @@ import Loading from "../../components/Common/Loading";
 import useRoleChecker from "../../hooks/useRoleChecker";
 
 const PopularClasses = () => {
-  const { role } = useRoleChecker();
-  const { isLoading, data: popularClasses = [] } = useQuery(
+  const { role , isLoading} = useRoleChecker();
+  const { isLoading: classLoading, data: popularClasses = [] } = useQuery(
     "popularClasses",
     async () => {
       const response = await axios.get("/classes-popular");
@@ -16,7 +16,7 @@ const PopularClasses = () => {
     }
   );
 
-  if (isLoading) {
+  if (classLoading ||isLoading) {
     return <Loading />;
   }
 
