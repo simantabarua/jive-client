@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import useAuth from "../../hooks/useAuth";
 
 const MySelectedClasses = () => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const axiosSecure = useAxios();
   const {
     isLoading,
@@ -17,7 +17,9 @@ const MySelectedClasses = () => {
     );
     return response.data;
   });
-  
+  const totalPayment = parseFloat(
+    selectedClasses.reduce((sum, items) => sum + items.price, 0).toFixed(2)
+  );
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -39,7 +41,6 @@ const MySelectedClasses = () => {
     });
   };
 
-
   if (isLoading) {
     return <Loading />;
   }
@@ -47,8 +48,12 @@ const MySelectedClasses = () => {
   return (
     <>
       <div className="overflow-x-auto">
+        <div className="flex justify-between p-10">
+          <h2 className="text-4xl">Total payment {totalPayment}</h2>
+          <h2 className="text-4xl">Total Selected class {selectedClasses.length}</h2>
+          <button className="btn btn-primary">Pay</button>
+        </div>
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>#</th>
@@ -89,7 +94,6 @@ const MySelectedClasses = () => {
                     >
                       Delete
                     </button>
-                    <button className="btn btn-primary">Pay</button>
                   </td>
                 </tr>
               )

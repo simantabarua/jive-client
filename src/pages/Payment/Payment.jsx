@@ -12,9 +12,9 @@ const Payment = () => {
   );
   return (
     <div>
-      <h2>Total payment { totalPayment}</h2>
+      <h2 className="text-4xl p-8">Total payment { totalPayment}</h2>
       <Elements stripe={stripePromise}>
-        <CheckoutForm classes={selectedClasses} price={totalPayment} />
+        <CheckoutForm   classes={selectedClasses} price={totalPayment} />
       </Elements>
     </div>
   );

@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
-
+import { FaChalkboardTeacher, FaMoneyBill,  FaUserFriends, FaUsersCog } from "react-icons/fa";
+import { HiDocumentAdd, HiShoppingCart } from "react-icons/hi";
+import { MdPayment } from "react-icons/md";
 const Sidebar = ({ userRole }) => {
+  userRole = "student";
   return (
     <div className="drawer-side ">
       <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
@@ -9,13 +12,20 @@ const Sidebar = ({ userRole }) => {
           <>
             <ul className="menu menu-compact  bg-base-200 w-52 rounded-box">
               <li>
-                <NavLink to="/dashboard/manage-classes">Manage Classes</NavLink>
+                <NavLink to="/dashboard/manage-classes">
+                  {" "}
+                  <FaUserFriends /> Manage Classes
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/manage-users">Manage Users</NavLink>
+                <NavLink to="/dashboard/manage-users">
+                  <FaUsersCog /> Manage Users
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/manage-orders">Manage Orders</NavLink>
+                <NavLink to="/dashboard/manage-orders">
+                  <HiShoppingCart /> Manage Orders
+                </NavLink>
               </li>
             </ul>
           </>
@@ -26,10 +36,14 @@ const Sidebar = ({ userRole }) => {
             <ul className="menu menu-compact   bg-base-200 w-52 rounded-box">
               <li className="menu-title">Title</li>
               <li>
-                <NavLink to="/dashboard/my-classes">My Classes</NavLink>
+                <NavLink to="/dashboard/my-classes">
+                  <FaChalkboardTeacher /> My Classes
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/add-class">Add a Class</NavLink>
+                <NavLink to="/dashboard/add-class">
+                  <HiDocumentAdd /> Add a Class
+                </NavLink>
               </li>
             </ul>
           </>
@@ -41,16 +55,18 @@ const Sidebar = ({ userRole }) => {
               <li className="menu-title">Title</li>
               <li>
                 <NavLink to="/dashboard/my-selected-classes">
-                  My Selected Classes
+                  <FaChalkboardTeacher /> My Selected Classes
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/my-enrolled-classes">
-                  My Enrolled Classes
+               <FaMoneyBill/>   My Enrolled Classes
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/payment">Payment</NavLink>
+                <NavLink to="/dashboard/payment">
+                  <MdPayment /> Payment
+                </NavLink>
               </li>
             </ul>
           </>

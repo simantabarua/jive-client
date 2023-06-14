@@ -1,6 +1,7 @@
-
 import useSelectedClass from "../../hooks/useSelectedClass";
-const ClassCard = ({ classItem , role}) => {
+import { FaUserGraduate } from "react-icons/fa";
+import { MdFactCheck } from "react-icons/md";
+const ClassCard = ({ classItem, role }) => {
   const { image, className, instructor, availableSeats, price, totalEnroll } =
     classItem;
   const { handleSelectedClass } = useSelectedClass();
@@ -22,17 +23,21 @@ const ClassCard = ({ classItem , role}) => {
         <div className="card-body">
           <h2 className="card-title">{className}</h2>
           <p>{instructor}</p>
-          <div className="flex flex-col md:flex-row md:gap-20">
-            <span>Price: ${price}</span>
-            <span>Available Seats: {availableSeats}</span>
-          </div>
-          <span>Student Enrolled: {totalEnroll}</span>
+          <span>Price: ${price}</span>
+          <span>
+            <MdFactCheck className="inline-block mr-2" /> Available Seats:
+            {availableSeats}
+          </span>
+          <span>
+            <FaUserGraduate className="inline-block mr-2" /> Student Enrolled:
+            {totalEnroll}
+          </span>
           <div className="card-actions">
             <button
               onClick={() => {
                 handleSelectedClass(classItem);
               }}
-              className="btn btn-sm btn-primary border-0"
+              className="btn btn-sm btn-primary border-0 mt-2"
               disabled={availableSeats < 0 || role !== "student"}
             >
               Select

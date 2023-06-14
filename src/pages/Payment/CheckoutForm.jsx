@@ -13,7 +13,7 @@ const CheckoutForm = ({ classes, price }) => {
   const [processing, setProcessing] = useState(false);
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-
+  console.log(cardError);
   useEffect(() => {
     if (price > 0) {
       axiosSecure.post("/payment-intent", { price }).then((res) => {
@@ -21,6 +21,7 @@ const CheckoutForm = ({ classes, price }) => {
       });
     }
   }, []);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,6 +43,8 @@ const CheckoutForm = ({ classes, price }) => {
     if (error) {
       console.log("error", error);
       setCardError(error.message);
+     
+      
     } else {
       setCardError("");
     }
@@ -63,6 +66,7 @@ const CheckoutForm = ({ classes, price }) => {
       Swal.fire({
         icon: "error",
         title: "Something went wrong",
+        html: `<p class="text-red-500">${cardError}</p>`
       });
     }
     //todo handle error message
@@ -87,6 +91,7 @@ const CheckoutForm = ({ classes, price }) => {
           Swal.fire({
             icon: "success",
             title: "Payment Successful",
+            text: `Your transaction it is ${transactionId}`
           });
         }
       });

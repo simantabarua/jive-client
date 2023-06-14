@@ -1,20 +1,28 @@
-
+import { useQuery } from "react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ReviewCard from "./ReviewCard";
 import SectionHeader from "../../components/Common/SectionHeader";
 import { Navigation, Pagination } from "swiper";
+import axios from "axios";
 
-export default function App() {
+const Testimonial = () => {
+  const { isLoading, data: reviews = [] } = useQuery("reviews", async () => {
+    const response = await axios.get("/reviews");
+    return response.data;
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <SectionHeader
         title="Hear What Our Customers Have to Say"
-        subtitle="Our customers have described our dishes as 'heavenly', 'mouth-watering', and 'the best I've ever tasted'. We're thrilled to share their reviews and testimonials with you, so you can see for yourself why Cuisine Route is the ultimate destination for foodies who crave culinary inspiration and satisfaction"
+        subtitle="Discover why our dance classes are the ultimate choice for dance enthusiasts!"
       />
 
       <Swiper
@@ -44,19 +52,14 @@ export default function App() {
         modules={[Navigation, Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <ReviewCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ReviewCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ReviewCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ReviewCard />
-        </SwiperSlide>
+        {reviews.map((review) => (
+          <SwiperSlide key={review._id}>
+            <ReviewCard review={review} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );
-}
+};
+
+export default Testimonial;

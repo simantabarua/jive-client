@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
 const InstructorCard = ({ instructor }) => {
-  const { image, userName, email, numberOfClasses } = instructor;
-  
+  const { image, userName, email, numberOfClasses, totalStudents } = instructor;
 
   return (
     <div
@@ -12,7 +11,7 @@ const InstructorCard = ({ instructor }) => {
     >
       <figure>
         <img
-          className="h-64 w-full object-left-top object-cover   md:w-96 rounded-lg"
+          className="h-64 w-full object-left-top object-cover  md:w-96 rounded-lg"
           src={image}
           loading="lazy"
           alt=""
@@ -21,9 +20,10 @@ const InstructorCard = ({ instructor }) => {
       <div className="card-body">
         <h2 className="card-title">{userName}</h2>
         <p>{email}</p>
-        <div className="flex flex-col md:flex-row md:gap-20">
-          <span>Number of Classes: {numberOfClasses}</span>
-        </div>
+
+        <span>Number of Classes: {numberOfClasses}</span>
+        <span> Total Students: {totalStudents}</span>
+
         <div className="card-actions">
           <Link to="">
             <button className="btn btn-sm btn-primary border-0">
