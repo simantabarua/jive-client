@@ -12,12 +12,12 @@ const useSelectedClass = () => {
   const handleSelectedClass = (classItem) => {
     if (!user) {
       Swal.fire({
-        title: "Please login to order the food",
+        title: "Please login to enroll class",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Login now!",
+        confirmButtonText: "Go to login",
         preConfirm: () => {
           return navigate("/login", { state: { from: location } });
         },
