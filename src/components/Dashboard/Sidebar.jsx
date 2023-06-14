@@ -3,7 +3,6 @@ import { FaChalkboardTeacher, FaMoneyBill,  FaUserFriends, FaUsersCog } from "re
 import { HiDocumentAdd, HiShoppingCart } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 const Sidebar = ({ userRole }) => {
-  userRole = "student";
   return (
     <div className="drawer-side ">
       <label htmlFor="my-drawer-3" className="drawer-overlay"></label>

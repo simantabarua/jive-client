@@ -5,7 +5,7 @@ const Footer = () => {
      <footer className="footer footer-center p-10 bg-base-300 mt-10 ">
   <div>
     <p className="font-bold">
-      ACME Industries Ltd. <br/>Providing reliable tech since 1992
+      Jive <br/>Providing reliable service
     </p> 
     <p>Copyright © 2023 - All right reserved</p>
   </div> 

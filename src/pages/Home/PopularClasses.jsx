@@ -4,8 +4,10 @@ import ClassCard from "../Classes/ClassCard";
 import { useQuery } from "react-query";
 import axios from "axios";
 import Loading from "../../components/Common/Loading";
+import useRoleChecker from "../../hooks/useRoleChecker";
 
 const PopularClasses = () => {
+  const { role } = useRoleChecker();
   const { isLoading, data: popularClasses = [] } = useQuery(
     "popularClasses",
     async () => {
@@ -27,9 +29,9 @@ const PopularClasses = () => {
         subtitle="Choose from a Wide Range of Highly Rated Classes!"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-6 md:px-3 lg:px-6 place-items-center ">
+      <div className="px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-6 md:px-3 lg:px-6 place-items-center ">
         {limitedClasses.map((popularClass, index) => (
-          <ClassCard key={index} classItem={popularClass} />
+          <ClassCard key={index} classItem={popularClass} role={role} />
         ))}
       </div>
 
