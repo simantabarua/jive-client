@@ -8,9 +8,9 @@ import useTitle from "../hooks/useTitle";
 
 const Dashboard = () => {
   useTitle("Dashboard")
-  const {role, } = useRoleChecker();
+  const {role, isLoading } = useRoleChecker();
   const { loading, userLoading } = useAuth();
-  if (loading || userLoading) {
+  if (loading || userLoading || isLoading) {
     return <Loading />;
   }
   return (

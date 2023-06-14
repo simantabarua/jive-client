@@ -10,7 +10,7 @@ const ManageClasses = () => {
   const axiosSecure = useAxios();
   const { user, loading } = useAuth();
   const [classId, setClassId] = useState("");
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset,  formState: { errors }, } = useForm();
   const {
     isLoading,
     data: classes = [],
@@ -20,6 +20,10 @@ const ManageClasses = () => {
 
     return response.data;
   });
+  const closeDialog = () => {
+    const dialog = document.getElementById("my_modal_3");
+    dialog.close();
+  };
 
   const handleClassStatus = (id, status, instructorEmail) => {
     axiosSecure
@@ -73,11 +77,13 @@ const ManageClasses = () => {
       })
       .then((response) => {
         if (response.data.modifiedCount > 0) {
+          closeDialog();
           Swal.fire({
             icon: "success",
             title: `feedback send successfully`,
           });
           refetch();
+          reset()
         }
       })
       .catch((error) => {
@@ -210,6 +216,9 @@ const ManageClasses = () => {
                       required: "Please type something",
                     })}
                   ></textarea>
+                   {errors.feedback && (
+                    <p className="text-red-500">{errors.feedback.message}</p>
+                  )}
                 </div>
                 <button
                   className="btn btn-primary w-64 mt-3 border-0"
