@@ -7,7 +7,6 @@ import Loading from "../../components/Common/Loading";
 import useRoleChecker from "../../hooks/useRoleChecker";
 
 const PopularClasses = () => {
-  const { role , isLoading} = useRoleChecker();
   const { isLoading: classLoading, data: popularClasses = [] } = useQuery(
     "popularClasses",
     async () => {
@@ -15,8 +14,9 @@ const PopularClasses = () => {
       return response.data;
     }
   );
+  const { role, useRoleLoading } = useRoleChecker();
 
-  if (classLoading ||isLoading) {
+  if (classLoading || useRoleLoading) {
     return <Loading />;
   }
 

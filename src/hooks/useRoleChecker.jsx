@@ -1,30 +1,38 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import useAuth from "./useAuth";
 import useAxios from "./useAxios";
 
 const useRoleChecker = () => {
-  const [role, setRole] = useState("student");
   const axiosSecure = useAxios();
   const { user } = useAuth();
   const email = user?.email;
 
-  const { data: userRole, isLoading } = useQuery(["role", email], async () => {
-    if (!user) {
-      setRole("student");
+  const fetchUser = async () => {
+    if (!email) {
       return;
-    } else {
-      const response = await axiosSecure.get(`/check-user?email=${email}`);
-      setRole(response.data);
-      return userRole;
     }
-  });
+    const response = await axiosSecure.get(`/check-user?email=${email}`);
+    return response.data;
+  };
 
-  useEffect(() => {
-    console.log(role);
-  }, [role]);
+  const { data: role, isLoading: useRoleLoading } = useQuery(
+    ["user", email],
+    fetchUser
+  );
 
-  return { role, isLoading };
+  return { role, useRoleLoading };
 };
 
 export default useRoleChecker;
+
+// if (!email) {
+//   return null;
+// }
+
+// if (useRoleLoading) {
+//   return null;
+// }
+
+// if (error) {
+//   return null;
+// }

@@ -12,7 +12,6 @@ const Sidebar = ({ userRole }) => {
             <ul className="menu menu-compact  bg-base-200 w-52 rounded-box">
               <li>
                 <NavLink to="/dashboard/manage-classes">
-                  {" "}
                   <FaUserFriends /> Manage Classes
                 </NavLink>
               </li>

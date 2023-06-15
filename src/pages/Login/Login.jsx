@@ -12,7 +12,7 @@ const Login = () => {
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
   const navigate = useNavigate();
-  const { emailPasswordSignIn, setLoading, user, loading } = useAuth();
+  const { emailPasswordSignIn, setLoading, loading } = useAuth();
 
   const {
     register,
@@ -64,9 +64,7 @@ const Login = () => {
     return <Loading />;
   }
 
-  if (user) {
-   return navigate("/");
-  }
+
 
   return (
     <>

@@ -5,9 +5,9 @@ import useRoleChecker from "../hooks/useRoleChecker";
 import Loading from "../components/Common/Loading";
 import useAuth from "../hooks/useAuth";
 const MainLayout = () => {
-  const { isLoading } = useRoleChecker();
+  const { useRoleLoading } = useRoleChecker();
   const {loading} = useAuth()
-  if (isLoading || loading ) {
+  if (useRoleLoading || loading ) {
     return <Loading />;
   }
   return (

@@ -8,16 +8,16 @@ import useTitle from "../hooks/useTitle";
 
 const Dashboard = () => {
   useTitle("Dashboard")
-  const {role, isLoading } = useRoleChecker();
+  const { role, useRoleLoading } = useRoleChecker();
+  console.log(role);
   const { loading, userLoading } = useAuth();
-  if (loading || userLoading || isLoading) {
+  if (loading || userLoading || useRoleLoading) {
     return <Loading />;
   }
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
-        {/* Navbar */}
         <DashboardNav />
         <Outlet />
       </div>
