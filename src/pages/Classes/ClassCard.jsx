@@ -1,10 +1,13 @@
 import useSelectedClass from "../../hooks/useSelectedClass";
 import { FaUserGraduate } from "react-icons/fa";
 import { MdFactCheck } from "react-icons/md";
+
 const ClassCard = ({ classItem, role }) => {
   const { image, className, instructor, availableSeats, price, totalEnroll } =
     classItem;
   const { handleSelectedClass } = useSelectedClass();
+  const userRole = role || "student"; 
+
   return (
     <>
       <div
@@ -38,7 +41,7 @@ const ClassCard = ({ classItem, role }) => {
                 handleSelectedClass(classItem);
               }}
               className="btn btn-sm btn-primary border-0 mt-2"
-              disabled={availableSeats < 0 || role !== "student"}
+              disabled={availableSeats < 0 || userRole !== "student"}
             >
               Select
             </button>

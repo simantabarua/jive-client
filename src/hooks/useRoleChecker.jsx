@@ -4,19 +4,18 @@ import useAxios from "./useAxios";
 
 const useRoleChecker = () => {
   const axiosSecure = useAxios();
-  const { user } = useAuth();
-  const email = user?.email;
+  const { user , loading} = useAuth();
+  const token = localStorage.getItem("access-token");
 
   const fetchUser = async () => {
-    if (!email) {
-      return;
-    }
-    const response = await axiosSecure.get(`/check-user?email=${email}`);
-    return response.data;
+    if (!loading && token !== null) {
+      const response = await axiosSecure.get(`/check-user?email=${user?.email}`);
+    return await response.data;
+   }
   };
 
   const { data: role, isLoading: useRoleLoading } = useQuery(
-    ["user", email],
+    ["role", user?.email],
     fetchUser
   );
 
@@ -25,14 +24,4 @@ const useRoleChecker = () => {
 
 export default useRoleChecker;
 
-// if (!email) {
-//   return null;
-// }
 
-// if (useRoleLoading) {
-//   return null;
-// }
-
-// if (error) {
-//   return null;
-// }

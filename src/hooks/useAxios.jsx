@@ -13,17 +13,20 @@ const useAxios = () => {
   // const axiosSecure = axios.create({
   //   baseURL: "http://localhost:5000",
   // });
+
   //request
-  axiosSecure.interceptors.request.use((request) => {
+  axiosSecure.interceptors.request.use(async (request) => {
     const token = localStorage.getItem("access-token");
-    if (token) {
+    console.log("token", token);
+    if (token ) {
       request.headers.Authorization = `Bearer ${token}`;
     }
-    return request;
+    return  request;
   });
+
   //response
   axiosSecure.interceptors.response.use(
-    (response) => response,
+    (response) =>  response,
     async (error) => {
       if (
         error.response &&
