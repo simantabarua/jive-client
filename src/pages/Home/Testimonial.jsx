@@ -48,9 +48,13 @@ const Testimonial = () => {
             slidesPerView: 3,
             spaceBetween: 20,
           },
+          1500: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
         }}
         modules={[Navigation, Pagination]}
-        className="mySwiper"
+        className="mySwiper max-w-[100rem] mx-auto"
       >
         {reviews.map((review) => (
           <SwiperSlide key={review._id}>

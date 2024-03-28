@@ -29,7 +29,7 @@ const PopularClasses = () => {
         subtitle="Choose from a Wide Range of Highly Rated Classes!"
       />
 
-      <div className="px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-6 md:px-3 lg:px-6 place-items-center ">
+      <div className="card-grid">
         {limitedClasses.map((popularClass, index) => (
           <ClassCard key={index} classItem={popularClass} role={role} />
         ))}

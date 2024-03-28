@@ -5,7 +5,7 @@ const InstructorCard = ({ instructor }) => {
 
   return (
     <div
-      className="card  w-full h-full  md:w-96 md:h-[29rem] bg-base-300 shadow-xl rounded-xl px-2 md:p-4 "
+      className="card w-full h-full max-w-md mx-auto md:w-96 md:h-[29rem] bg-base-300 shadow-xl rounded-xl px-2 md:p-4 "
       data-aos="zoom-in-up"
       data-aos-duration="800"
     >

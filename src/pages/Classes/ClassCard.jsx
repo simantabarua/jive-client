@@ -6,12 +6,12 @@ const ClassCard = ({ classItem, role }) => {
   const { image, className, instructor, availableSeats, price, totalEnroll } =
     classItem;
   const { handleSelectedClass } = useSelectedClass();
-  const userRole = role || "student"; 
+  const userRole = role || "student";
 
   return (
     <>
       <div
-        className={`card w-full h-full md:w-96 md:h-[29rem]  shadow-xl rounded-xl px-2 md:p-4 ${
+        className={`card w-full h-full max-w-md mx-auto md:w-96 md:h-[29rem]  shadow-xl rounded-xl px-2 md:p-4 ${
           availableSeats < 0 ? "bg-red-300" : "bg-base-300"
         }`}
       >

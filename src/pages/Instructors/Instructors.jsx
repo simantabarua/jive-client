@@ -5,7 +5,7 @@ import Loading from "../../components/Common/Loading";
 import useTitle from "../../hooks/useTitle";
 
 const Instructors = () => {
-  useTitle("Instructors")
+  useTitle("Instructors");
   const { isLoading, data: instructors = [] } = useQuery(
     "instructor",
     async () => {
@@ -18,7 +18,7 @@ const Instructors = () => {
   }
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 xl:grid-cols-3 gap-6  px-3 lg:px-6 place-items-center">
+      <div className="card-grid mt-10">
         {instructors.map((instructor, index) => (
           <InstructorCard instructor={instructor} key={index} />
         ))}
