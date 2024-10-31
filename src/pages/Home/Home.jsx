@@ -8,15 +8,15 @@ import PopularInstructors from "./PopularInstructors";
 import Testimonials from "./Testimonial";
 
 const Home = () => {
-  useTitle('Home')
+  useTitle("Home");
   return (
     <>
       <HeroBanner />
-      <DanceCategory/>
       <PopularClasses />
       <PopularInstructors />
       <FeatureDance />
-      <DataOverview/>
+      <DataOverview />
+      <DanceCategory />
       <Testimonials />
     </>
   );
