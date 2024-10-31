@@ -37,7 +37,7 @@ const InstructorCard = ({ instructor }) => {
         </div>
 
         <div className="card-actions ">
-          <Link>
+          <Link to={`/instructor`}>
             <button className="btn btn-sm bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg flex items-center gap-2 hover:bg-indigo-500 transition-colors duration-300">
               <FiEye /> View Profile
             </button>

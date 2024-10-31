@@ -37,6 +37,8 @@ import axios from "axios";
 import UpdateClass from "../dashboard/InstructorDashboard/UpdateClass";
 import NotFound from "../pages/NotFound/NotFound";
 import ManageOrders from "../dashboard/AdminDashboard/ManageOrders";
+import InstructorProfile from "../pages/Instructror/Instructor";
+import UserProfile from "../pages/Profile/Proifle";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +71,18 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/instructor",
+        element: <InstructorProfile />,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
       },
     ],
   },

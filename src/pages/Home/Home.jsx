@@ -1,5 +1,4 @@
 import useTitle from "../../hooks/useTitle";
-import DanceCategory from "./DanceCategory";
 import DataOverview from "./DataOverview";
 import FeatureDance from "./FeatureDance";
 import HeroBanner from "./HeroBanner";
@@ -16,7 +15,6 @@ const Home = () => {
       <PopularInstructors />
       <FeatureDance />
       <DataOverview />
-      <DanceCategory />
       <Testimonials />
     </>
   );

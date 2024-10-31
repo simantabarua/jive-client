@@ -1,18 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
-import { navLinks } from "../../utils/links";
 import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 import { HiMenuAlt1, HiMoon, HiOutlineX, HiSun } from "react-icons/hi";
+import { IoLanguageOutline } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import Avatar from "../Common/Avatar";
+import { navLinks } from "../../utils/links";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useAuth();
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   useEffect(() => {
     themeChange(false);
@@ -25,75 +25,92 @@ const Header = () => {
     }
   }, []);
 
-  const menuLinks = navLinks.map(({ label, path }, index) => (
-    <li key={index}>
+  const menuLinks = navLinks.map(({ label, path, submenu }, index) => (
+    <li key={index} className="relative group">
       <NavLink to={path}>{label}</NavLink>
+      {submenu && (
+        <ul className="absolute hidden group-hover:block bg-base-100 rounded-md shadow-lg p-2 mt-2">
+          {submenu.map((subLink, subIndex) => (
+            <li key={subIndex}>
+              <NavLink
+                to={subLink.path}
+                className="hover:bg-gray-200 p-2 rounded"
+              >
+                {subLink.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      )}
     </li>
   ));
+
   return (
-    <>
-      <div className="w-full  bg-base-300 z-10">
-        <div className="navbar container mx-auto">
-          <div className="navbar-start">
-            <div className="dropdown lg:hidden">
-              <button
-                className="btn-circle btn-sm flex justify-center items-center"
-                onClick={toggleMenu}
-              >
-                {isMenuOpen ? <HiOutlineX /> : <HiMenuAlt1 />}
-              </button>
-              {isMenuOpen && (
-                // for mobile
-                <ul className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100  rounded-box w-52 z-10">
-                  {menuLinks}
-                  {user && <NavLink to="/dashboard">Dashboard</NavLink>}
-                </ul>
-              )}
-            </div>
-            <a className="btn btn-ghost normal-case text-xl">Jive</a>
-          </div>
-          <div className="navbar-center hidden lg:flex">
-            {/* for desktop */}
-            <ul className="menu-horizontal gap-2 lg:gap-5  items-center font-semibold">
-              {menuLinks}
-              {user && <NavLink to="/dashboard">Dashboard</NavLink>}
-            </ul>
-          </div>
-          <div className="navbar-end">
-            <div className="mx-2">
-              {isDarkMode ? (
-                <button
-                  className="btn-circle transition duration-400 transform rotate-45  "
-                  data-set-theme="light"
-                >
-                  <HiSun
-                    className="w-8 h-8 inline"
-                    onClick={() => setIsDarkMode(!isDarkMode)}
-                  />
-                </button>
-              ) : (
-                <button
-                  className="btn-circle transition duration-400 "
-                  data-set-theme="dark"
-                >
-                  <HiMoon
-                    className="w-8 h-8 inline"
-                    onClick={() => setIsDarkMode(!isDarkMode)}
-                  />
-                </button>
-              )}
-            </div>
-            {user ? (
-              <Avatar />
+    <div className="w-full bg-base-300 z-10">
+      <div className="navbar container mx-auto">
+        {/* Navbar Start: Mobile Toggle, Brand */}
+        <div className="navbar-start flex items-center">
+          <button
+            className="btn-circle btn-sm flex lg:hidden"
+            onClick={toggleMenu}
+          >
+            {isMenuOpen ? <HiOutlineX /> : <HiMenuAlt1 />}
+          </button>
+          <a className="btn btn-ghost normal-case text-xl ml-2">Jive</a>
+        </div>
+
+        {/* Navbar Center: Links and Search */}
+        <div className="navbar-center hidden lg:flex items-center">
+          <ul className="menu-horizontal gap-4 font-semibold">
+            {menuLinks}
+            {user && <NavLink to="/dashboard">Dashboard</NavLink>}
+          </ul>
+        </div>
+
+        {/* Navbar End: Theme Toggle, Language, User Avatar/Login */}
+        <div className="navbar-end flex items-center gap-4">
+          {/* Theme Toggle */}
+          <button
+            className="btn-circle"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            data-set-theme={isDarkMode ? "light" : "dark"}
+          >
+            {isDarkMode ? (
+              <HiSun className="text-lg" />
             ) : (
-              <Link to="/login">
-                <button className="btn btn-primary">login</button>
-              </Link>
+              <HiMoon className="text-lg" />
             )}
-          </div>
+          </button>
+
+          {/* Language Toggle */}
+          <button className="btn btn-ghost hidden lg:inline-flex items-center">
+            <IoLanguageOutline className="mr-1" /> EN
+          </button>
+
+          {/* User Avatar or Login */}
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <Avatar className="btn btn-circle btn-ghost" />
+              
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-primary">Login</button>
+            </Link>
+          )}
         </div>
       </div>
-    </>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="lg:hidden bg-base-100 p-4 rounded-md shadow-lg">
+          <ul className="space-y-2">
+            {menuLinks}
+            {user && <NavLink to="/dashboard">Dashboard</NavLink>}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 };
 

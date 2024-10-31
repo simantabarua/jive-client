@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const Avatar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,10 +36,10 @@ const Avatar = () => {
               <p>{user?.email}</p>
             </div>
             <li>
-              <a className="justify-between">
+              <Link to={"/profile"} className="justify-between">
                 Profile
                 <span className="badge">New</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a>Settings</a>
