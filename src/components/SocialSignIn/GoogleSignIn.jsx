@@ -15,9 +15,9 @@ const GoogleSignIn = () => {
           userName: data.user?.displayName,
           email: data.user?.email,
           role: "student",
-          image: data.user?.photoURL
+          image: data.user?.photoURL,
         };
-        
+
         axios
           .post("/users", newUser)
           .then((response) => {
@@ -46,7 +46,7 @@ const GoogleSignIn = () => {
     <>
       <button onClick={handleGoogleSignIn} className="btn btn-outline  w-full">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+          src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
           className="w-6 h-6 mx-2"
         />
         Login With Google
